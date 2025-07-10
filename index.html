@@ -4,18 +4,23 @@
    
     <head>
         <meta charset="utf-8"/>
-        <title>Raysen Strategies</title>
+        <title>KnowledgeDB - LLMs for Everyone</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport"/>
-        <meta content="FlameOnePage freebie theme for web startups by FairTech SEO." name="description"/>
-        <meta content="FairTech" name="author"/>
-        <link href="http://fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet" type="text/css">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <meta content="KnowledgeDB - Your one-stop-shop for creating custom LLM applications with ease." name="description"/>
+        <meta content="KnowledgeDB" name="author"/>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <style>
+        body { font-family: 'Poppins', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; font-weight: 600; }
+        .container { max-width: 1600px; }
+        </style>
         <link href="vendor/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/animate.css" rel="stylesheet">
         <link href="vendor/swiper/css/swiper.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/layout.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/layout.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" href="favicon.ico"/>
     </head>
    
@@ -32,9 +37,8 @@
                         </button>
 
                           <div class="logo">
-                            <a class="logo-wrap" href="#body">
-                                <img class="logo-img logo-img-main" src="img/logo6.png" alt="FlameOnePage Logo">
-                                <img class="logo-img logo-img-active" src="img/logo6.png" alt="FlameOnePage Dark Logo">
+                            <a class="logo-wrap" href="#body" style="text-decoration: none; display: flex; align-items: center; height: 100%;">
+                                <h2 style="margin: 0; color: #2c3e50; font-weight: 700; font-size: 32px; line-height: 1; font-family: 'Orbitron', monospace;">Knowledge<span style="color: #e74c3c; font-size: 36px; font-weight: 900;">DB</span></h2>
                             </a>
                         </div>
                     </div>
@@ -52,10 +56,8 @@
                         <div class="menu-container">
                             <ul class="nav navbar-nav navbar-nav-right">
                                 <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#body">Home</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#about">Team</a></li>
-								<li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#services">Services</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#products">Products</a></li>
-								<li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#work">Credentials</a></li>
+                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#about">Features</a></li>
+								<li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#services">Solutions</a></li>
                                 <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#pricing">Pricing</a></li>
                                 <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#contact">Contact</a></li>
                             </ul>
@@ -79,10 +81,10 @@
                     <div class="container">
                         <div class="carousel-centered">
                             <div class="margin-b-40">
-                                <h1 class="carousel-title">Hi-End Solutions</h1>
-                                <p class="color-white">Lorem ipsum dolor amet consectetur adipiscing dolore magna aliqua <br/> enim minim estudiat veniam siad venumus dolore</p>
+                                <h3 class="carousel-title">Build LLM Apps Effortlessly</h3>
+                                <p class="color-white">Transform your ideas into powerful AI applications with KnowledgeDB <br/> Your complete platform for custom LLM development</p>
                             </div>
-                            <a href="#" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Details</a>
+                            <a href="#pricing" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Get Started</a>
                         </div>
                     </div>
                 </div>
@@ -91,10 +93,10 @@
                     <div class="container">
                         <div class="carousel-centered">
                             <div class="margin-b-40">
-                                <h2 class="carousel-title">Personal Approach</h2>
-                                <p class="color-white">Lorem ipsum dolor amet consectetur adipiscing dolore magna aliqua <br/> enim minim estudiat veniam siad venumus dolore</p>
+                                <h2 class="carousel-title">LLMs for Everyone</h2>
+                                <p class="color-white">No coding required - Create, deploy, and scale your AI solutions <br/> with our intuitive drag-and-drop interface</p>
                             </div>
-                            <a href="#" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Take a Tour</a>
+                            <a href="#about" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -106,32 +108,29 @@
         <!-- About -->
         <div id="about">
             <div class="content-lg container">
-                <!-- Masonry Grid -->
-                <div class="masonry-grid row">
-                    <div class="masonry-grid-sizer col-xs-6 col-sm-6 col-md-1"></div>
-                    <div class="masonry-grid-item col-xs-12 col-sm-6 col-md-4 sm-margin-b-30">
-                        <div class="margin-b-60">
-                            <h2>Harmonious Planning</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incididunt ut laboret dolore magna ut consequat siad esqudiat dolor</p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 sm-margin-b-30">
+                        <div class="text-center" style="padding: 40px 20px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 15px; color: white; height: 280px; display: flex; flex-direction: column; justify-content: center;">
+                            <i class="fas fa-code" style="font-size: 48px; margin-bottom: 20px; color: #e74c3c;"></i>
+                            <h2 style="color: white; margin-bottom: 20px;">No-Code Builder</h2>
+                            <p style="color: rgba(255,255,255,0.9);">Create sophisticated LLM applications without writing a single line of code. Our visual interface makes AI development accessible to everyone.</p>
                         </div>
-                        <img class="full-width img-responsive wow fadeInUp" src="img/500x500/01.jpg" alt="Portfolio Image" data-wow-duration=".3" data-wow-delay=".2s">
                     </div>
-                    <div class="masonry-grid-item col-xs-12 col-sm-6 col-md-4">
-                        <div class="margin-b-60">
-                          <h2>Easy Integration</h2>
-                          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incididunt ut laboret dolore magna ut consequat siad esqudiat dolor</p>  
+                    <div class="col-md-4 col-sm-4 sm-margin-b-30">
+                        <div class="text-center" style="padding: 40px 20px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 15px; color: white; height: 280px; display: flex; flex-direction: column; justify-content: center;">
+                            <i class="fas fa-rocket" style="font-size: 48px; margin-bottom: 20px; color: #e74c3c;"></i>
+                            <h2 style="color: white; margin-bottom: 20px;">Instant Deployment</h2>
+                            <p style="color: rgba(255,255,255,0.9);">Deploy your LLM applications instantly to the cloud with one click. Scale automatically based on demand with our robust infrastructure.</p>
                         </div>
-						 <img class="full-width img-responsive wow fadeInUp" src="img/500x500/02.jpg" alt="Portfolio Image" data-wow-duration=".3" data-wow-delay=".3s">
                     </div>
-                    <div class="masonry-grid-item col-xs-12 col-sm-6 col-md-4">
-                        <div class="margin-t-60 margin-b-60">
-                            <h2>Superior Support</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incididunt ut laboret dolore magna ut consequat siad esqudiat dolor</p>
+                    <div class="col-md-4 col-sm-4 sm-margin-b-30">
+                        <div class="text-center" style="padding: 40px 20px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 15px; color: white; height: 280px; display: flex; flex-direction: column; justify-content: center;">
+                            <i class="fas fa-shield-alt" style="font-size: 48px; margin-bottom: 20px; color: #e74c3c;"></i>
+                            <h2 style="color: white; margin-bottom: 20px;">Enterprise Ready</h2>
+                            <p style="color: rgba(255,255,255,0.9);">Built for scale with enterprise-grade security, compliance, and support. Integrate seamlessly with your existing workflows and systems.</p>
                         </div>
-                        <img class="full-width img-responsive wow fadeInUp" src="img/500x500/03.jpg" alt="Portfolio Image" data-wow-duration=".3" data-wow-delay=".4s">
                     </div>
-				</div>
-                <!-- End Masonry Grid -->
+                </div>
             </div>
             
             <div class="bg-color-sky-light">
@@ -139,60 +138,59 @@
                     <div class="row">
                         <div class="col-md-5 col-sm-5 md-margin-b-60">
                             <div class="margin-t-50 margin-b-30">
-                                <h2>Why Us?</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                <h2>Why KnowledgeDB?</h2>
+                                <p>We democratize AI development by making LLM application creation accessible to everyone. Whether you're a startup, enterprise, or individual developer, our platform provides the tools you need to build, deploy, and scale intelligent applications without the complexity.</p>
                             </div>
-                            <a href="#" class="btn-theme btn-theme-sm btn-white-bg text-uppercase">More...</a>
+                            <a href="#contact" class="btn-theme btn-theme-sm btn-white-bg text-uppercase">Contact Us</a>
                         </div>
-                        <div class="col-md-5 col-sm-7 col-md-offset-2">
-                            <!-- Accordion -->
-                            <div class="accordion">
-                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingOne">
-                                            <h4 class="panel-title">
-                                                <a class="panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    Expert Research
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                            <div class="panel-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                            </div>
+                        <div class="col-md-7 col-sm-7">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 12px; margin-bottom: 20px; overflow: hidden; border: none;">
+                                    <div class="panel-heading" role="tab" id="headingOne" style="background: transparent; border: none; padding: 25px; border-bottom: none;">
+                                        <h3 class="panel-title" style="display: flex; align-items: center; margin: 0;">
+                                            <i class="fas fa-brain" style="font-size: 28px; margin-right: 20px; color: #e74c3c;"></i>
+                                            <a class="panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: white; text-decoration: none; flex: 1; font-size: 18px; font-weight: 600;">
+                                                Pre-trained Models
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="border: none;">
+                                        <div class="panel-body" style="padding: 0 25px 25px; color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6; border: none;">
+                                            Access a comprehensive library of pre-trained language models including GPT, BERT, and custom domain-specific models ready for immediate use in your applications.
                                         </div>
                                     </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingTwo">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    Hi-Tech Engineering
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                            <div class="panel-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                            </div>
+                                </div>
+                                <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 12px; margin-bottom: 20px; overflow: hidden; border: none;">
+                                    <div class="panel-heading" role="tab" id="headingTwo" style="background: transparent; border: none; padding: 25px; border-bottom: none;">
+                                        <h3 class="panel-title" style="display: flex; align-items: center; margin: 0;">
+                                            <i class="fas fa-cogs" style="font-size: 28px; margin-right: 20px; color: #e74c3c;"></i>
+                                            <a class="collapsed panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: white; text-decoration: none; flex: 1; font-size: 18px; font-weight: 600;">
+                                                Custom Training
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" style="border: none;">
+                                        <div class="panel-body" style="padding: 0 25px 25px; color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6; border: none;">
+                                            Fine-tune models with your own data to create specialized AI applications tailored to your specific use case and industry requirements.
                                         </div>
                                     </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" role="tab" id="headingThree">
-                                            <h4 class="panel-title">
-                                                <a class="collapsed panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    Outstanding Results
-                                                </a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                            <div class="panel-body">
-                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
-                                            </div>
+                                </div>
+                                <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 12px; margin-bottom: 20px; overflow: hidden; border: none;">
+                                    <div class="panel-heading" role="tab" id="headingThree" style="background: transparent; border: none; padding: 25px; border-bottom: none;">
+                                        <h3 class="panel-title" style="display: flex; align-items: center; margin: 0;">
+                                            <i class="fas fa-plug" style="font-size: 28px; margin-right: 20px; color: #e74c3c;"></i>
+                                            <a class="collapsed panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color: white; text-decoration: none; flex: 1; font-size: 18px; font-weight: 600;">
+                                                API Integration
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" style="border: none;">
+                                        <div class="panel-body" style="padding: 0 25px 25px; color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6; border: none;">
+                                            Seamlessly integrate your LLM applications with existing systems through our robust REST APIs and SDKs for popular programming languages.
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- End Accodrion -->
                         </div>
                     </div>
                     <!--// end row -->
@@ -201,111 +199,58 @@
         </div>
         <!-- End About -->
 
-        <!-- Latest Products -->
-        <div id="products">
-            <div class="content-lg container">
-                <div class="row margin-b-40">
-                    <div class="col-sm-6">
-                        <h2>Recent Projects</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incididunt ut laboret dolore magna aliqua enim minim veniam exercitation</p>
-                    </div>
-                </div>
-                <!--// end row -->
 
-                <div class="row">
-                    <!-- Latest Products -->
-                    <div class="col-sm-4 sm-margin-b-50">
-                        <div class="margin-b-20">
-                            <img class="img-responsive" src="img/970x647/01.jpg" alt="Latest Products Image">
-                        </div>
-                        <h4><a href="#">Interior</a> <span class="text-uppercase margin-l-20">Architecture</span></h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                        <a class="link" href="#">Details</a>
-                    </div>
-                    <!-- End Latest Products -->
-
-                    <!-- Latest Products -->
-                    <div class="col-sm-4 sm-margin-b-50">
-                        <div class="margin-b-20">
-                            <img class="img-responsive" src="img/970x647/02.jpg" alt="Latest Products Image">
-                        </div>
-                        <h4><a href="#">Trend</a> <span class="text-uppercase margin-l-20">Setting</span></h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                        <a class="link" href="#">Details</a>
-                    </div>
-                    <!-- End Latest Products -->
-
-                    <!-- Latest Products -->
-                    <div class="col-sm-4 sm-margin-b-50">
-                        <div class="margin-b-20">
-                            <img class="img-responsive" src="img/970x647/03.jpg" alt="Latest Products Image">
-                        </div>
-                        <h4><a href="#">Fresh Style</a> <span class="text-uppercase margin-l-20">Philosophy</span></h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                        <a class="link" href="#">Details</a>
-                    </div>
-                    <!-- End Latest Products -->
-                </div>
-                <!--// end row -->
-            </div>
-        </div>
-        <!-- End Latest Products -->
 
         <!-- Pricing -->
         <div id="pricing">
             <div class="bg-color-sky-light">
                 <div class="content-lg container">
-                    <div class="row row-space-1">
-                        <div class="col-sm-4 sm-margin-b-2">
-                            <!-- Pricing -->
-                            <div class="pricing">
-                                <div class="margin-b-30">
-                                    <i class="pricing-icon icon-chemistry"></i>
-                                    <h3>Silver Package <span> - $</span> 74.99</h3>
-                                    <p>Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
-                                </div>
-                                <ul class="list-unstyled pricing-list margin-b-50">
-                                    <li class="pricing-list-item">Starter Kit</li>
-                                    <li class="pricing-list-item">Basic Features</li>
-                                    <li class="pricing-list-item">Annual Report</li>
+                    <div class="row">
+                        <div class="col-sm-4 sm-margin-b-30">
+                            <div style="text-align: center; padding: 50px 30px; background: white; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; border: 2px solid transparent;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.1)';">
+                                <i class="fas fa-seedling" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
+                                <h3 style="font-size: 24px; margin-bottom: 10px; color: #2c3e50;">Starter</h3>
+                                <div style="font-size: 36px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">$29<span style="font-size: 16px; color: #7f8c8d;">/mo</span></div>
+                                <p style="color: #7f8c8d; margin-bottom: 30px; font-size: 15px;">Perfect for individuals and small projects getting started with LLM applications</p>
+                                <ul class="list-unstyled" style="margin-bottom: 40px; text-align: left;">
+                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>5 LLM Applications</li>
+                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>10K API Calls/month</li>
+                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Basic Templates</li>
+                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Community Support</li>
                                 </ul>
-                                <a href="pricing.html" class="btn-theme btn-theme-sm btn-default-bg text-uppercase">Start Now</a>
+                                <a href="#contact" class="btn-theme btn-theme-sm btn-default-bg text-uppercase" style="width: 100%; padding: 15px; font-weight: 600;">Start Free Trial</a>
                             </div>
-                            <!-- End Pricing -->
                         </div>
-                        <div class="col-sm-4 sm-margin-b-2">
-                            <!-- Pricing -->
-                            <div class="pricing pricing-active">
-                                <div class="margin-b-30">
-                                    <i class="pricing-icon icon-badge"></i>
-                                    <h3>Gold Package <span> - $</span> 199.99</h3>
-                                    <p>Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
-                                </div>
-                                <ul class="list-unstyled pricing-list margin-b-50">
-                                    <li class="pricing-list-item">Professional Kit</li>
-                                    <li class="pricing-list-item">Full Options</li>
-                                    <li class="pricing-list-item">Bi-anual Report</li>
+                        <div class="col-sm-4 sm-margin-b-30">
+                            <div style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; border: 3px solid #e74c3c; transform: scale(1.05);" onmouseover="this.style.transform='translateY(-10px) scale(1.05)'; this.style.boxShadow='0 30px 60px rgba(0,0,0,0.25)';" onmouseout="this.style.transform='translateY(0) scale(1.05)'; this.style.boxShadow='0 20px 50px rgba(0,0,0,0.2)';">
+                                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; padding: 8px 20px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase;">Most Popular</div>
+                                <i class="fas fa-briefcase" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
+                                <h3 style="font-size: 24px; margin-bottom: 10px; color: white;">Professional</h3>
+                                <div style="font-size: 36px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">$99<span style="font-size: 16px; color: rgba(255,255,255,0.7);">/mo</span></div>
+                                <p style="color: rgba(255,255,255,0.8); margin-bottom: 30px; font-size: 15px;">Ideal for growing businesses and development teams building production apps</p>
+                                <ul class="list-unstyled" style="margin-bottom: 40px; text-align: left;">
+                                    <li style="margin-bottom: 12px; color: white; display: flex; align-items: center;"><i class="fas fa-check" style="color: #e74c3c; margin-right: 10px; font-size: 14px;"></i>Unlimited Applications</li>
+                                    <li style="margin-bottom: 12px; color: white; display: flex; align-items: center;"><i class="fas fa-check" style="color: #e74c3c; margin-right: 10px; font-size: 14px;"></i>100K API Calls/month</li>
+                                    <li style="margin-bottom: 12px; color: white; display: flex; align-items: center;"><i class="fas fa-check" style="color: #e74c3c; margin-right: 10px; font-size: 14px;"></i>Custom Model Training</li>
+                                    <li style="margin-bottom: 12px; color: white; display: flex; align-items: center;"><i class="fas fa-check" style="color: #e74c3c; margin-right: 10px; font-size: 14px;"></i>Priority Support</li>
                                 </ul>
-                                <a href="pricing.html" class="btn-theme btn-theme-sm btn-default-bg text-uppercase">Start Now</a>
+                                <a href="#contact" class="btn-theme btn-theme-sm btn-white-brd text-uppercase" style="width: 100%; padding: 15px; font-weight: 600;">Get Started</a>
                             </div>
-                            <!-- End Pricing -->
                         </div>
-                        <div class="col-sm-4">
-                            <!-- Pricing -->
-                            <div class="pricing">
-                                <div class="margin-b-30">
-                                    <i class="pricing-icon icon-shield"></i>
-                                    <h3>Platinum Package <span> - $</span> 500</h3>
-                                    <p>Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
-                                </div>
-                                <ul class="list-unstyled pricing-list margin-b-50">
-                                    <li class="pricing-list-item">Complete Kit</li>
-                                    <li class="pricing-list-item">Advanced Options</li>
-                                    <li class="pricing-list-item">Monthly Report</li>
+                        <div class="col-sm-4 sm-margin-b-30">
+                            <div style="text-align: center; padding: 50px 30px; background: white; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; border: 2px solid transparent;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.1)';">
+                                <i class="fas fa-building" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
+                                <h3 style="font-size: 24px; margin-bottom: 10px; color: #2c3e50;">Enterprise</h3>
+                                <div style="font-size: 36px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">Custom</div>
+                                <p style="color: #7f8c8d; margin-bottom: 30px; font-size: 15px;">Scalable solutions for large organizations with advanced security and compliance needs</p>
+                                <ul class="list-unstyled" style="margin-bottom: 40px; text-align: left;">
+                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Unlimited Everything</li>
+                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Dedicated Infrastructure</li>
+                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Advanced Security</li>
+                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>24/7 Support</li>
                                 </ul>
-                                <a href="pricing.html" class="btn-theme btn-theme-sm btn-default-bg text-uppercase">Start Now</a>
+                                <a href="#contact" class="btn-theme btn-theme-sm btn-default-bg text-uppercase" style="width: 100%; padding: 15px; font-weight: 600;">Contact Sales</a>
                             </div>
-                            <!-- End Pricing -->
                         </div>
                     </div>
                     <!--// end row -->
@@ -314,301 +259,53 @@
         </div>
         <!-- End Pricing -->
 
-        <!-- Work -->
-        <div id="work">
-            <div class="section-seperator">
-                <div class="content-md container">
-                    <div class="row margin-b-40">
-                        <div class="col-sm-6">
-                            <h2>Portfolio</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incididunt ut laboret dolore magna aliqua enim minim veniam exercitation</p>
-                        </div>
-                    </div>
-                    <!--// end row -->
 
-                    <!-- Masonry Grid -->
-                    <div class="masonry-grid row">
-
-
-                        <div class="masonry-grid-item col-xs-12 col-sm-6 col-md-4 md-margin-b-30">
-                            <!-- Work -->
-                            <div class="work work-popup-trigger">
-                                <div class="work-overlay">
-                                    <img class="full-width img-responsive" src="img/397x300/01.jpg" alt="Portfolio Image">
-                                </div>
-                                <div class="work-popup-overlay">
-                                    <div class="work-popup-content">
-                                        <a href="javascript:void(0);" class="work-popup-close">Hide</a>
-                                        <div class="margin-b-30">
-                                            <h3 class="margin-b-5">Art Of Coding</h3>
-                                            <span>Clean &amp; Minimalistic Design</span>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-8 work-popup-content-divider sm-margin-b-20">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-                                                    <ul class="list-inline work-popup-tag">
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Strategy,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Implementation,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Credentials</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p class="margin-b-5"><strong>Project Manager:</strong> Boris Becker</p>
-                                                    <p class="margin-b-5"><strong>Executive:</strong> Heike Macatsch</p>
-                                                    <p class="margin-b-5"><strong>Architect:</strong> Oliver Pocher</p>
-                                                    <p class="margin-b-5"><strong>Client:</strong> FairTech</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Work -->
-                        </div>
-                        <div class="masonry-grid-item col-xs-12 col-sm-6 col-md-4 md-margin-b-30">
-                            <!-- Work -->
-                            <div class="work work-popup-trigger">
-                                <div class="work-overlay">
-                                    <img class="full-width img-responsive" src="img/397x300/02.jpg" alt="Portfolio Image">
-                                </div>
-                                <div class="work-popup-overlay">
-                                    <div class="work-popup-content">
-                                        <a href="javascript:void(0);" class="work-popup-close">Hide</a>
-                                        <div class="margin-b-30">
-                                            <h3 class="margin-b-5">Art Of Coding</h3>
-                                            <span>Clean &amp; Minimalistic Design</span>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-8 work-popup-content-divider sm-margin-b-20">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-                                                    <ul class="list-inline work-popup-tag">
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Strategy,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Implementation,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Credentials</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p class="margin-b-5"><strong>Project Manager:</strong> Boris Becker</p>
-                                                    <p class="margin-b-5"><strong>Executive:</strong> Heike Macatsch</p>
-                                                    <p class="margin-b-5"><strong>Architect:</strong> Oliver Pocher</p>
-                                                    <p class="margin-b-5"><strong>Client:</strong> Keenthemes</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Work -->
-                        </div>
-                        <div class="masonry-grid-item col-xs-12 col-sm-6 col-md-4">
-                            <!-- Work -->
-                            <div class="work work-popup-trigger">
-                                <div class="work-overlay">
-                                    <img class="full-width img-responsive" src="img/397x300/03.jpg" alt="Portfolio Image">
-                                </div>
-                                <div class="work-popup-overlay">
-                                    <div class="work-popup-content">
-                                        <a href="javascript:void(0);" class="work-popup-close">Hide</a>
-                                        <div class="margin-b-30">
-                                            <h3 class="margin-b-5">Art Of Coding</h3>
-                                            <span>Clean &amp; Minimalistic Design</span>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-8 work-popup-content-divider sm-margin-b-20">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-                                                    <ul class="list-inline work-popup-tag">
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Strategy,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Implementation,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Credentials</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p class="margin-b-5"><strong>Project Manager:</strong> Boris Becker</p>
-                                                    <p class="margin-b-5"><strong>Executive:</strong> Heike Macatsch</p>
-                                                    <p class="margin-b-5"><strong>Architect:</strong> Oliver Pocher</p>
-                                                    <p class="margin-b-5"><strong>Client:</strong> Keenthemes</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Work -->
-                        </div>
-						<div class="masonry-grid-sizer col-xs-6 col-sm-6 col-md-1"></div>
-						<div class="masonry-grid-item col-xs-12 col-sm-6 col-md-4 margin-b-30">
-                            <!-- Work -->
-                            <div class="work work-popup-trigger">
-                                <div class="work-overlay">
-                                    <img class="full-width img-responsive" src="img/397x415/01.jpg" alt="Portfolio Image">
-                                </div>
-                                <div class="work-popup-overlay">
-                                    <div class="work-popup-content">
-                                        <a href="javascript:void(0);" class="work-popup-close">Hide</a>
-                                        <div class="margin-b-30">
-                                            <h3 class="margin-b-5">Art Of Coding</h3>
-                                            <span>Clean &amp; Minimalistic Design</span>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-8 work-popup-content-divider sm-margin-b-20">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-                                                    <ul class="list-inline work-popup-tag">
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Strategy,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Implementation,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Credentials</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p class="margin-b-5"><strong>Project Manager:</strong> Boris Becker</p>
-                                                    <p class="margin-b-5"><strong>Executive:</strong> Heike Macatsch</p>
-                                                    <p class="margin-b-5"><strong>Architect:</strong> Oliver Pocher</p>
-                                                    <p class="margin-b-5"><strong>Client:</strong> FairTech</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Work -->
-                        </div>
-                        <div class="masonry-grid-item col-xs-12 col-sm-6 col-md-8 margin-b-30">
-                            <!-- Work -->
-                            <div class="work work-popup-trigger">
-                                <div class="work-overlay">
-                                    <img class="full-width img-responsive" src="img/800x400/01.jpg" alt="Portfolio Image">
-                                </div>
-                                <div class="work-popup-overlay">
-                                    <div class="work-popup-content">
-                                        <a href="javascript:void(0);" class="work-popup-close">Hide</a>
-                                        <div class="margin-b-30">
-                                            <h3 class="margin-b-5">Art Of Coding</h3>
-                                            <span>Clean &amp; Minimalistic Design</span>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-8 work-popup-content-divider sm-margin-b-20">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-                                                    <ul class="list-inline work-popup-tag">
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Strategy,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Implementation,</a></li>
-                                                        <li class="work-popup-tag-item"><a class="work-popup-tag-link" href="#">Credentials</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4">
-                                                <div class="margin-t-10 sm-margin-t-0">
-                                                    <p class="margin-b-5"><strong>Project Manager:</strong> Boris Becker</p>
-                                                    <p class="margin-b-5"><strong>Executive:</strong> Heike Macatsch</p>
-                                                    <p class="margin-b-5"><strong>Architect:</strong> Oliver Pocher</p>
-                                                    <p class="margin-b-5"><strong>Client:</strong> FairTech</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Work -->
-                        </div>
-                    </div>
-                    <!-- End Masonry Grid -->
-                </div>
-            </div>
-            
-            <!-- Clients -->
-            <div class="content-lg container">
-                <!-- Swiper Clients -->
-                <div class="swiper-slider swiper-clients">
-                    <!-- Swiper Wrapper -->
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <img class="swiper-clients-img" src="img/clients/01.png" alt="Clients Logo">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="swiper-clients-img" src="img/clients/02.png" alt="Clients Logo">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="swiper-clients-img" src="img/clients/03.png" alt="Clients Logo">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="swiper-clients-img" src="img/clients/04.png" alt="Clients Logo">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="swiper-clients-img" src="img/clients/05.png" alt="Clients Logo">
-                        </div>
-                        <div class="swiper-slide">
-                            <img class="swiper-clients-img" src="img/clients/06.png" alt="Clients Logo">
-                        </div>
-                    </div>
-                    <!-- End Swiper Wrapper -->
-                </div>
-                <!-- End Swiper Clients -->
-            </div>
-            <!-- End Clients -->
-        </div>
-        <!-- End Work -->
 
         <!-- Services -->
         <div id="services">
             <div class="bg-color-sky-light" data-auto-height="true">
                 <div class="content-lg container">
                     <div class="row margin-b-40">
-                        <div class="col-sm-6">
-                            <h2>Services</h2>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incididunt ut laboret dolore magna aliqua enim minim veniam exercitation</p>
+                        <div class="col-sm-8 col-sm-offset-2 text-center">
+                            <h2>Our Solutions</h2>
+                            <p>Comprehensive LLM development solutions designed to accelerate your AI journey from concept to production deployment.</p>
                         </div>
                     </div>
                     <!--// end row -->
 
                     <div class="row row-space-1 margin-b-2">
                         <div class="col-sm-4 sm-margin-b-2">
-                            <div class="service" data-height="height">
+                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
                                 <div class="service-element">
-                                    <i class="service-icon icon-chemistry"></i>
+                                    <i class="fas fa-comments" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
                                 </div>
                                 <div class="service-info">
-                                    <h3>Company Formation</h3>
-                                    <p class="margin-b-5">Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
+                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Chatbot Builder</h3>
+                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Create intelligent conversational AI with natural language understanding and context awareness</p>
                                 </div>
                                 <a href="#" class="content-wrapper-link"></a>    
                             </div>
                         </div>
                         <div class="col-sm-4 sm-margin-b-2">
-                            <div class="service bg-color-base" data-height="height">
+                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
                                 <div class="service-element">
-                                    <i class="service-icon color-white icon-screen-tablet"></i>
+                                    <i class="fas fa-file-alt" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
                                 </div>
                                 <div class="service-info">
-                                    <h3 class="color-white">Stuff Management</h3>
-                                    <p class="color-white margin-b-5">Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
+                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Document Analysis</h3>
+                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Extract insights from documents with advanced text processing and summarization capabilities</p>
                                 </div>
                                 <a href="#" class="content-wrapper-link"></a>    
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="service" data-height="height">
+                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
                                 <div class="service-element">
-                                    <i class="service-icon icon-badge"></i>
+                                    <i class="fas fa-pen-fancy" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
                                 </div>
                                 <div class="service-info">
-                                    <h3>KPI Optimization</h3>
-                                    <p class="margin-b-5">Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
+                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Content Generation</h3>
+                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Generate high-quality content for marketing, documentation, and creative writing</p>
                                 </div>
                                 <a href="#" class="content-wrapper-link"></a>    
                             </div>
@@ -618,37 +315,37 @@
 
                     <div class="row row-space-1">
                         <div class="col-sm-4 sm-margin-b-2">
-                            <div class="service" data-height="height">
+                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
                                 <div class="service-element">
-                                    <i class="service-icon icon-notebook"></i>
+                                    <i class="fas fa-database" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
                                 </div>
                                 <div class="service-info">
-                                    <h3>Information Security</h3>
-                                    <p class="margin-b-5">Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
+                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Knowledge Base</h3>
+                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Build intelligent knowledge bases that understand and answer complex queries</p>
                                 </div>
                                 <a href="#" class="content-wrapper-link"></a>    
                             </div>
                         </div>
                         <div class="col-sm-4 sm-margin-b-2">
-                            <div class="service" data-height="height">
+                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
                                 <div class="service-element">
-                                    <i class="service-icon icon-speedometer"></i>
+                                    <i class="fas fa-terminal" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
                                 </div>
                                 <div class="service-info">
-                                    <h3>Recrutinment</h3>
-                                    <p class="margin-b-5">Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
+                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Code Assistant</h3>
+                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">AI-powered coding assistance for faster development and code optimization</p>
                                 </div>
                                 <a href="#" class="content-wrapper-link"></a>    
                             </div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="service" data-height="height">
+                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
                                 <div class="service-element">
-                                    <i class="service-icon icon-badge"></i>
+                                    <i class="fas fa-chart-line" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
                                 </div>
                                 <div class="service-info">
-                                    <h3>Materials Supply</h3>
-                                    <p class="margin-b-5">Lorem ipsum dolor amet consectetur ut consequat siad esqudiat dolor</p>
+                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Data Analytics</h3>
+                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Transform raw data into actionable insights with natural language queries</p>
                                 </div>
                                 <a href="#" class="content-wrapper-link"></a>    
                             </div>
@@ -666,36 +363,16 @@
             <div class="section-seperator">
                 <div class="content-lg container">
                     <div class="row">
-                        <!-- Contact List -->
-                        <div class="col-sm-4 sm-margin-b-50">
-                            <h3><a href="http://ft-seo.ch/">Zurich</a> <span class="text-uppercase margin-l-20">Human Resources</span></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                            <ul class="list-unstyled contact-list">
-                                <li><i class="margin-r-10 color-base icon-call-out"></i> +41 60 66 555 44 33</li>
-                                <li><i class="margin-r-10 color-base icon-envelope"></i> hr@flameonepage.com</li>
-                            </ul>
-                        </div>
-                        <!-- End Contact List -->
-
-                        <!-- Contact List -->
-                        <div class="col-sm-4 sm-margin-b-50">
-                            <h3><a href="http://ft-seo.ch/">Malta</a> <span class="text-uppercase margin-l-20">Development</span></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                            <ul class="list-unstyled contact-list">
-                                <li><i class="margin-r-10 color-base icon-call-out"></i> +356 7965 1257</li>
-                                <li><i class="margin-r-10 color-base icon-envelope"></i> developmemt@flameonepage.com</li>
-                            </ul>
-                        </div>
-                        <!-- End Contact List -->
-
-                        <!-- Contact List -->
-                        <div class="col-sm-4 sm-margin-b-50">
-                            <h3><a href="http://ft-seo.ch/">Manchester</a> <span class="text-uppercase margin-l-20">CEO</span></h3>
-                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed tempor incdidunt ut laboret dolor magna ut consequat siad esqudiat dolor</p>
-                            <ul class="list-unstyled contact-list">
-                                <li><i class="margin-r-10 color-base icon-call-out"></i> +44 654 583 5518</li>
-                                <li><i class="margin-r-10 color-base icon-envelope"></i> ceo@flameonepage.com</li>
-                            </ul>
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div style="text-align: center; padding: 50px 40px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                                <i class="fas fa-envelope" style="font-size: 48px; margin-bottom: 20px; color: #e74c3c;"></i>
+                                <h3>Get in Touch</h3>
+                                <p style="margin-bottom: 30px;">Ready to transform your business with AI? Contact us to discuss your LLM application needs and explore custom solutions.</p>
+                                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                                    <strong style="color: #2c3e50;">shubhamraolive@gmail.com</strong>
+                                </div>
+                                <p style="color: #7f8c8d; font-size: 14px;">We typically respond within 24 hours</p>
+                            </div>
                         </div>
                         <!-- End Contact List -->
                     </div>
@@ -705,8 +382,12 @@
             <!-- End Contact List -->
             
             <!-- Google Map -->
-            <div class="map height-300">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2724.0694570748947!2d7.455080415208266!3d46.94067397914616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e39d0cf20e8d1%3A0x9daac4cd3043d067!2sThunstrasse+50%2C+3005+Bern%2C+Switzerland!5e0!3m2!1sen!2sin!4v1496749852928" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <div class="map height-300" style="position: relative;">
+                <div style="position: absolute; bottom: 20px; right: 20px; z-index: 2; background: rgba(44,62,80,0.9); padding: 15px; border-radius: 8px; color: white; pointer-events: none;">
+                    <i class="fas fa-map-marker-alt" style="font-size: 20px; margin-right: 8px; color: #e74c3c;"></i>
+                    <strong style="color: white; font-size: 14px;">Dublin, Ireland</strong>
+                </div>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9528.516234567891!2d-6.2603097!3d53.3498053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e99a9c0b2e7%3A0x9c9c0b2e7a9c0b2e!2sDublin+City+Centre%2C+Dublin%2C+Ireland!5e0!3m2!1sen!2sie!4v1640995200000" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen></iframe>
 			</div>
         </div>
         <!-- End Contact -->
@@ -715,55 +396,62 @@
         <!--========== FOOTER ==========-->
         <footer class="footer">
             <!-- Links -->
-            <div class="section-seperator">
-                <div class="content-md container">
+            <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); padding: 60px 0;">
+                <div class="container">
                     <div class="row">
-                        <div class="col-sm-2 sm-margin-b-30">
-                            <!-- List -->
-                            <ul class="list-unstyled footer-list">
-                                <li class="footer-list-item"><a href="#body">Home</a></li>
-                                <li class="footer-list-item"><a href="#about">Team</a></li>
-                                <li class="footer-list-item"><a href="#work">Credentials</a></li>
-                                <li class="footer-list-item"><a href="#contact">Contact</a></li>
+                        <div class="col-sm-3 sm-margin-b-30">
+                            <h4 style="color: #e74c3c; margin-bottom: 25px; font-size: 18px;">Navigation</h4>
+                            <ul class="list-unstyled">
+                                <li style="margin-bottom: 12px;"><a href="#body" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Home</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#about" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Features</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#services" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Solutions</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#contact" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Contact</a></li>
                             </ul>
-                            <!-- End List -->
                         </div>
-                        <div class="col-sm-2 sm-margin-b-30">
-                            <!-- List -->
-                            <ul class="list-unstyled footer-list">
-                                <li class="footer-list-item"><a href="#">Twitter</a></li>
-                                <li class="footer-list-item"><a href="#">Facebook</a></li>
-                                <li class="footer-list-item"><a href="#">Instagram</a></li>
-                                <li class="footer-list-item"><a href="#">YouTube</a></li>
+                        <div class="col-sm-3 sm-margin-b-30">
+                            <h4 style="color: #e74c3c; margin-bottom: 25px; font-size: 18px;">Resources</h4>
+                            <ul class="list-unstyled">
+                                <li style="margin-bottom: 12px;"><a href="#pricing" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Pricing</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Documentation</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">API Reference</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Tutorials</a></li>
                             </ul>
-                            <!-- End List -->
+                        </div>
+                        <div class="col-sm-3 sm-margin-b-30">
+                            <h4 style="color: #e74c3c; margin-bottom: 25px; font-size: 18px;">Legal</h4>
+                            <ul class="list-unstyled">
+                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Privacy Policy</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Terms of Service</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Security</a></li>
+                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Status</a></li>
+                            </ul>
                         </div>
                         <div class="col-sm-3">
-                            <!-- List -->
-                            <ul class="list-unstyled footer-list">
-                                <li class="footer-list-item"><a href="#">Subscribe to Our Newsletter</a></li>
-                                <li class="footer-list-item"><a href="#">Privacy Policy</a></li>
-                                <li class="footer-list-item"><a href="#">Terms &amp; Conditions</a></li>
-                            </ul>
-                            <!-- End List -->
+                            <h4 style="color: #e74c3c; margin-bottom: 25px; font-size: 18px;">Connect</h4>
+                            <div style="margin-bottom: 20px;">
+                                <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; text-align: center; line-height: 40px; margin-right: 10px; color: rgba(255,255,255,0.8); transition: all 0.3s ease;" onmouseover="this.style.background='#e74c3c'; this.style.color='white';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.color='rgba(255,255,255,0.8)';"><i class="fab fa-twitter"></i></a>
+                                <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; text-align: center; line-height: 40px; margin-right: 10px; color: rgba(255,255,255,0.8); transition: all 0.3s ease;" onmouseover="this.style.background='#e74c3c'; this.style.color='white';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.color='rgba(255,255,255,0.8)';"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; text-align: center; line-height: 40px; color: rgba(255,255,255,0.8); transition: all 0.3s ease;" onmouseover="this.style.background='#e74c3c'; this.style.color='white';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.color='rgba(255,255,255,0.8)';"><i class="fab fa-github"></i></a>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6;">Building the future of AI-powered applications, one solution at a time.</p>
                         </div>
                     </div>
-                    <!--// end row -->
                 </div>
             </div>
             <!-- End Links -->
 
             <!-- Copyright -->
-            <div class="content container">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <img class="footer-logo" src="img/logo-dark.png" alt="flameonepage Logo">
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <p class="margin-b-0"><a class="fweight-700" href="#">FlameOnePage</a> Theme Powered by: <a class="fweight-700" href="http://ft-seo.ch/">FairTech Studio</a></p>
+            <div style="background: #1a252f; padding: 25px 0;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-6" style="display: flex; align-items: center; height: 60px;">
+                            <h3 style="margin: 0; color: white; font-weight: 700; font-size: 24px; font-family: 'Orbitron', monospace;">Knowledge<span style="color: #e74c3c; font-size: 28px; font-weight: 900;">DB</span></h3>
+                        </div>
+                        <div class="col-xs-6 text-right" style="display: flex; align-items: center; justify-content: flex-end; height: 60px;">
+                            <p class="margin-b-0" style="color: rgba(255,255,255,0.7); font-size: 14px;">LLMs for Everyone &copy; 2025</p>
+                        </div>
                     </div>
                 </div>
-                <!--// end row -->
             </div>
             <!-- End Copyright -->
         </footer>
