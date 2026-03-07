@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documents - KnowledgeDB API</title>
+  <meta name="description" content="KnowledgeDB API documents — upload, generate, list, and manage documents with automatic AI indexing for RAG search.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-header"></div>
+    <div id="sidebar-nav" class="sidebar-nav"></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="top-bar" data-title="Documents"></div>
+
+    <div class="page-hero">
+      <h1>Documents</h1>
+      <p>Upload files or generate AI-written documents into your knowledge bases. Documents are automatically indexed by Amazon Bedrock Knowledge Base for RAG search. Supported formats: PDF, DOCX, TXT, Markdown.</p>
+    </div>
+
+    <div class="content-area">
+      <div class="auth-banner">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
+        <div class="text">All document endpoints require authentication. Include <code>Authorization: Bearer &lt;idToken&gt;</code> in your request headers.</div>
+      </div>
+
+      <div class="info-box tip">
+        <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div>After uploading or generating a document, Bedrock Knowledge Base automatically processes and indexes it. This happens asynchronously — the document status will show <code>"processing"</code> until indexing completes.</div>
+      </div>
+
+      <!-- UPLOAD -->
+      <div class="endpoint-block" id="upload">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Upload Document</h2>
+          <code class="endpoint-url">/documents/upload</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Upload a file to a knowledge base. Uses <code>multipart/form-data</code> encoding. Maximum file size is 10MB. Supported formats: PDF, DOCX, TXT, MD.</p>
+
+            <div class="params-title">Form Fields</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>file</td><td>file <span class="param-required">required</span></td><td>The document file to upload.</td></tr>
+                <tr><td>knowledgeDbId</td><td>string <span class="param-required">required</span></td><td>Target knowledge base ID.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">Response Fields (201)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>documentId</td><td>string</td><td>Unique document identifier.</td></tr>
+                <tr><td>filename</td><td>string</td><td>Original filename.</td></tr>
+                <tr><td>chunkCount</td><td>number</td><td>Initially 0, updated after indexing.</td></tr>
+                <tr><td>message</td><td>string</td><td>Success confirmation.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="upload-req">Request</button>
+              <button class="code-tab" data-target="upload-res">Response 201</button>
+              <button class="code-tab" data-target="upload-curl">cURL</button>
+              <button class="code-tab test-tab" data-target="upload-test">Test</button>
+            </div>
+            <div class="code-panel active" id="upload-req">
+<pre><span class="comment">// POST /documents/upload</span>
+<span class="comment">// Content-Type: multipart/form-data</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+
+<span class="comment">// Form fields:</span>
+<span class="key">file</span>: <span class="string">&lt;binary file data&gt;</span>
+<span class="key">knowledgeDbId</span>: <span class="string">"281e85f4-00b8-4613-b518-a3b4679e8d4c"</span></pre>
+            </div>
+            <div class="code-panel" id="upload-res">
+<pre><span class="comment">// 201 Created</span>
+{
+  <span class="key">"documentId"</span>: <span class="string">"a1b2c3d4-e5f6-7890-abcd-ef1234567890"</span>,
+  <span class="key">"filename"</span>: <span class="string">"technical-guide.pdf"</span>,
+  <span class="key">"chunkCount"</span>: <span class="number">0</span>,
+  <span class="key">"message"</span>: <span class="string">"Document uploaded and processing started. Ingestion is handled automatically by Bedrock Knowledge Base."</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="upload-curl">
+<pre><span class="comment"># cURL example</span>
+curl -X POST \
+  https://fgbpqt2pq6.execute-api.us-east-1.amazonaws.com/prod/documents/upload \
+  -H <span class="string">"Authorization: Bearer &lt;idToken&gt;"</span> \
+  -F <span class="string">"file=@./document.pdf"</span> \
+  -F <span class="string">"knowledgeDbId=281e85f4-00b8-4613-b518-a3b4679e8d4c"</span></pre>
+            </div>
+            <div class="code-panel" id="upload-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>KnowledgeDB ID</label>
+                  <input type="text" id="upload-kdb-id" placeholder="281e85f4-00b8-4613-b518-a3b4679e8d4c">
+                </div>
+                <div class="test-field">
+                  <label>File</label>
+                  <input type="file" id="upload-file" accept=".pdf,.docx,.txt,.md">
+                </div>
+                <button class="test-send" onclick="tryUploadDoc()">Send Request</button>
+                <div class="test-response" id="upload-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GENERATE -->
+      <div class="endpoint-block" id="generate">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Generate Document</h2>
+          <code class="endpoint-url">/documents/generate</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Generate a markdown document using AI (Claude Haiku 4.5) based on a text prompt. The generated document is automatically stored in S3 and indexed for search.</p>
+
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>prompt</td><td>string <span class="param-required">required</span></td><td>Topic or instructions for document generation.</td></tr>
+                <tr><td>knowledgeDbId</td><td>string <span class="param-required">required</span></td><td>Target knowledge base ID.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">Response Fields (201)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>documentId</td><td>string</td><td>Unique document identifier.</td></tr>
+                <tr><td>filename</td><td>string</td><td>Auto-generated filename from prompt.</td></tr>
+                <tr><td>prompt</td><td>string</td><td>Original prompt used.</td></tr>
+                <tr><td>contentPreview</td><td>string</td><td>First 500 characters of generated content.</td></tr>
+                <tr><td>message</td><td>string</td><td>Success confirmation.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="gen-req">Request</button>
+              <button class="code-tab" data-target="gen-res">Response 201</button>
+              <button class="code-tab test-tab" data-target="gen-test">Test</button>
+            </div>
+            <div class="code-panel active" id="gen-req">
+<pre><span class="comment">// POST /documents/generate</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"prompt"</span>: <span class="string">"Write a guide about microservices architecture"</span>,
+  <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-00b8-4613-b518-a3b4679e8d4c"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="gen-res">
+<pre><span class="comment">// 201 Created</span>
+{
+  <span class="key">"documentId"</span>: <span class="string">"b2c3d4e5-f6a7-8901-bcde-f12345678901"</span>,
+  <span class="key">"filename"</span>: <span class="string">"write-a-guide-about-microservices-architecture.md"</span>,
+  <span class="key">"prompt"</span>: <span class="string">"Write a guide about microservices architecture"</span>,
+  <span class="key">"chunkCount"</span>: <span class="number">0</span>,
+  <span class="key">"contentPreview"</span>: <span class="string">"# Microservices Architecture Guide\n\n## Introduction..."</span>,
+  <span class="key">"message"</span>: <span class="string">"Document generated and stored successfully"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="gen-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>KnowledgeDB ID</label>
+                  <input type="text" id="gen-kdb-id" placeholder="281e85f4-00b8-4613-b518-a3b4679e8d4c">
+                </div>
+                <div class="test-field">
+                  <label>Prompt</label>
+                  <textarea id="gen-prompt" placeholder="Write a comprehensive guide about..."></textarea>
+                </div>
+                <button class="test-send" onclick="tryGenerateDoc()">Send Request</button>
+                <div class="test-response" id="gen-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIST -->
+      <div class="endpoint-block" id="list">
+        <div class="endpoint-header">
+          <span class="method-badge get">GET</span>
+          <h2>List Documents</h2>
+          <code class="endpoint-url">/documents</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>List all documents for the authenticated user. Optionally filter by knowledge base ID using a query parameter.</p>
+
+            <div class="params-title">Query Parameters</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>knowledgeDbId</td><td>string <span class="param-optional">optional</span></td><td>Filter documents by knowledge base.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">Document Object</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>documentId</td><td>string</td><td>Unique identifier.</td></tr>
+                <tr><td>filename</td><td>string</td><td>Original or generated filename.</td></tr>
+                <tr><td>fileType</td><td>string</td><td>MIME type (e.g., <code>application/pdf</code>).</td></tr>
+                <tr><td>fileSize</td><td>number</td><td>File size in bytes.</td></tr>
+                <tr><td>knowledgeDbId</td><td>string</td><td>Parent knowledge base ID.</td></tr>
+                <tr><td>chunkCount</td><td>number</td><td>Number of indexed chunks.</td></tr>
+                <tr><td>createdAt</td><td>string</td><td>ISO 8601 timestamp.</td></tr>
+                <tr><td>status</td><td>string</td><td><code>processing</code>, <code>indexed</code>, or <code>reprocessing</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="listdoc-req">Request</button>
+              <button class="code-tab" data-target="listdoc-res">Response 200</button>
+              <button class="code-tab test-tab" data-target="listdoc-test">Test</button>
+            </div>
+            <div class="code-panel active" id="listdoc-req">
+<pre><span class="comment">// GET /documents?knowledgeDbId=281e85f4-...</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span></pre>
+            </div>
+            <div class="code-panel" id="listdoc-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"documents"</span>: [
+    {
+      <span class="key">"documentId"</span>: <span class="string">"a1b2c3d4-..."</span>,
+      <span class="key">"filename"</span>: <span class="string">"technical-guide.pdf"</span>,
+      <span class="key">"fileType"</span>: <span class="string">"application/pdf"</span>,
+      <span class="key">"fileSize"</span>: <span class="number">245760</span>,
+      <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-..."</span>,
+      <span class="key">"chunkCount"</span>: <span class="number">12</span>,
+      <span class="key">"createdAt"</span>: <span class="string">"2025-07-04T12:00:00.000000"</span>,
+      <span class="key">"status"</span>: <span class="string">"processing"</span>
+    }
+  ],
+  <span class="key">"count"</span>: <span class="number">1</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="listdoc-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>KnowledgeDB ID <span style="opacity:0.5">(optional filter)</span></label>
+                  <input type="text" id="listdoc-kdb-id" placeholder="281e85f4-00b8-4613-b518-a3b4679e8d4c">
+                </div>
+                <button class="test-send" onclick="tryListDocs()">Send Request</button>
+                <div class="test-response" id="listdoc-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GET DOCUMENT -->
+      <div class="endpoint-block" id="get">
+        <div class="endpoint-header">
+          <span class="method-badge get">GET</span>
+          <h2>Get Document</h2>
+          <code class="endpoint-url">/documents/{documentId}</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Retrieve metadata for a specific document, including a pre-signed S3 download URL valid for 1 hour.</p>
+
+            <div class="params-title">Path Parameters</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>documentId</td><td>string <span class="param-required">required</span></td><td>Document ID to retrieve.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">Additional Response Fields</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>downloadUrl</td><td>string</td><td>Pre-signed S3 URL for downloading the file. Expires in 1 hour.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="getdoc-res">Response 200</button>
+              <button class="code-tab test-tab" data-target="getdoc-test">Test</button>
+            </div>
+            <div class="code-panel active" id="getdoc-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"documentId"</span>: <span class="string">"a1b2c3d4-..."</span>,
+  <span class="key">"filename"</span>: <span class="string">"technical-guide.pdf"</span>,
+  <span class="key">"fileType"</span>: <span class="string">"application/pdf"</span>,
+  <span class="key">"fileSize"</span>: <span class="number">245760</span>,
+  <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-..."</span>,
+  <span class="key">"chunkCount"</span>: <span class="number">12</span>,
+  <span class="key">"createdAt"</span>: <span class="string">"2025-07-04T12:00:00.000000"</span>,
+  <span class="key">"status"</span>: <span class="string">"processing"</span>,
+  <span class="key">"downloadUrl"</span>: <span class="string">"https://s3.amazonaws.com/..."</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="getdoc-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>Document ID</label>
+                  <input type="text" id="getdoc-id" placeholder="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
+                </div>
+                <button class="test-send" onclick="tryGetDoc()">Send Request</button>
+                <div class="test-response" id="getdoc-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DELETE -->
+      <div class="endpoint-block" id="delete">
+        <div class="endpoint-header">
+          <span class="method-badge delete">DELETE</span>
+          <h2>Delete Document</h2>
+          <code class="endpoint-url">/documents/{documentId}</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Permanently delete a document. Removes the file from S3, its metadata sidecar, and triggers a Bedrock KB sync to remove indexed vectors.</p>
+
+            <div class="params-title">Path Parameters</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>documentId</td><td>string <span class="param-required">required</span></td><td>Document ID to delete.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="deldoc-res">Response 200</button>
+              <button class="code-tab test-tab" data-target="deldoc-test">Test</button>
+            </div>
+            <div class="code-panel active" id="deldoc-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"message"</span>: <span class="string">"Document 'technical-guide.pdf' deleted successfully"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="deldoc-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>Document ID</label>
+                  <input type="text" id="deldoc-id" placeholder="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
+                </div>
+                <button class="test-send" onclick="tryDeleteDoc()">Send Request</button>
+                <div class="test-response" id="deldoc-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REINDEX -->
+      <div class="endpoint-block" id="reindex">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Reindex Document</h2>
+          <code class="endpoint-url">/documents/reindex</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Trigger a re-processing of a document through the Bedrock Knowledge Base. Useful if indexing failed or you want to refresh the vector embeddings.</p>
+
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>documentId</td><td>string <span class="param-required">required</span></td><td>Document ID to reindex.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="reindex-res">Response 200</button>
+              <button class="code-tab test-tab" data-target="reindex-test">Test</button>
+            </div>
+            <div class="code-panel active" id="reindex-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"documentId"</span>: <span class="string">"a1b2c3d4-..."</span>,
+  <span class="key">"chunkCount"</span>: <span class="number">0</span>,
+  <span class="key">"message"</span>: <span class="string">"Document reindex triggered. Bedrock Knowledge Base will reprocess the document."</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="reindex-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>Document ID</label>
+                  <input type="text" id="reindex-doc-id" placeholder="a1b2c3d4-e5f6-7890-abcd-ef1234567890">
+                </div>
+                <button class="test-send" onclick="tryReindexDoc()">Send Request</button>
+                <div class="test-response" id="reindex-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+<script>
+async function tryUploadDoc() {
+  showLoading('upload-response');
+  try {
+    const fileInput = document.getElementById('upload-file');
+    const kdbId = document.getElementById('upload-kdb-id').value;
+    if (!fileInput.files[0]) { renderResponse('upload-response', 400, { error: 'Select a file' }); return; }
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    formData.append('knowledgeDbId', kdbId);
+    const { status, data } = await apiRequest('POST', '/documents/upload', formData, true, true);
+    renderResponse('upload-response', status, data);
+  } catch(e) { renderResponse('upload-response', 0, { error: e.message }); }
+}
+
+async function tryGenerateDoc() {
+  showLoading('gen-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/documents/generate', {
+      prompt: document.getElementById('gen-prompt').value,
+      knowledgeDbId: document.getElementById('gen-kdb-id').value
+    });
+    renderResponse('gen-response', status, data);
+  } catch(e) { renderResponse('gen-response', 0, { error: e.message }); }
+}
+
+async function tryListDocs() {
+  showLoading('listdoc-response');
+  try {
+    const kdbId = document.getElementById('listdoc-kdb-id').value;
+    const path = kdbId ? '/documents?knowledgeDbId=' + encodeURIComponent(kdbId) : '/documents';
+    const { status, data } = await apiRequest('GET', path);
+    renderResponse('listdoc-response', status, data);
+  } catch(e) { renderResponse('listdoc-response', 0, { error: e.message }); }
+}
+
+async function tryGetDoc() {
+  showLoading('getdoc-response');
+  try {
+    const docId = document.getElementById('getdoc-id').value;
+    if (!docId) { renderResponse('getdoc-response', 400, { error: 'Enter a document ID' }); return; }
+    const { status, data } = await apiRequest('GET', '/documents/' + encodeURIComponent(docId));
+    renderResponse('getdoc-response', status, data);
+  } catch(e) { renderResponse('getdoc-response', 0, { error: e.message }); }
+}
+
+async function tryDeleteDoc() {
+  showLoading('deldoc-response');
+  try {
+    const docId = document.getElementById('deldoc-id').value;
+    if (!docId) { renderResponse('deldoc-response', 400, { error: 'Enter a document ID' }); return; }
+    const { status, data } = await apiRequest('DELETE', '/documents/' + encodeURIComponent(docId));
+    renderResponse('deldoc-response', status, data);
+  } catch(e) { renderResponse('deldoc-response', 0, { error: e.message }); }
+}
+
+async function tryReindexDoc() {
+  showLoading('reindex-response');
+  try {
+    const docId = document.getElementById('reindex-doc-id').value;
+    if (!docId) { renderResponse('reindex-response', 400, { error: 'Enter a document ID' }); return; }
+    const { status, data } = await apiRequest('POST', '/documents/reindex', { documentId: docId });
+    renderResponse('reindex-response', status, data);
+  } catch(e) { renderResponse('reindex-response', 0, { error: e.message }); }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAG Search - KnowledgeDB API</title>
+  <meta name="description" content="KnowledgeDB API RAG search — ask natural language questions and get AI-generated answers grounded in your documents.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-header"></div>
+    <div id="sidebar-nav" class="sidebar-nav"></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="top-bar" data-title="RAG Search"></div>
+
+    <div class="page-hero">
+      <h1>RAG Search</h1>
+      <p>Ask natural language questions and receive AI-generated answers grounded in your uploaded documents. Powered by Amazon Bedrock Knowledge Base retrieval and Claude for answer generation.</p>
+    </div>
+
+    <div class="content-area">
+      <div class="auth-banner">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
+        <div class="text">Requires authentication. Include <code>Authorization: Bearer &lt;idToken&gt;</code> in your request headers.</div>
+      </div>
+
+      <div class="info-box note">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div>The search pipeline: your question → vector similarity search in Bedrock KB (filtered by user + knowledge base) → relevant document chunks retrieved → Claude generates a grounded answer with source citations.</div>
+      </div>
+
+      <div class="endpoint-block" id="search">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Search</h2>
+          <code class="endpoint-url">/search</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Submit a natural language question scoped to a specific knowledge base. The API retrieves relevant document chunks using vector search, then generates an AI answer grounded in those chunks.</p>
+
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>question</td><td>string <span class="param-required">required</span></td><td>Natural language question to answer.</td></tr>
+                <tr><td>knowledge_db</td><td>string <span class="param-required">required</span></td><td>KnowledgeDB ID to search within.</td></tr>
+                <tr><td>top_k</td><td>number <span class="param-optional">optional</span></td><td>Number of document chunks to retrieve. Default: <code>3</code>, max: <code>10</code>.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">Response Fields</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>answer</td><td>string</td><td>AI-generated answer based on retrieved documents.</td></tr>
+                <tr><td>sources</td><td>array</td><td>Array of source objects with document references.</td></tr>
+                <tr><td>question</td><td>string</td><td>Original question echoed back.</td></tr>
+                <tr><td>knowledgeDb</td><td>string</td><td>KnowledgeDB ID searched.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">Source Object</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>doc_id</td><td>string</td><td>Document ID of the source.</td></tr>
+                <tr><td>title</td><td>string</td><td>Filename of the source document.</td></tr>
+                <tr><td>chunk</td><td>string</td><td>Relevant text excerpt (max 500 chars).</td></tr>
+                <tr><td>score</td><td>number</td><td>Relevance score from vector search.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="search-req">Request</button>
+              <button class="code-tab" data-target="search-res">Response</button>
+              <button class="code-tab" data-target="search-curl">cURL</button>
+              <button class="code-tab test-tab" data-target="search-test">Test</button>
+            </div>
+            <div class="code-panel active" id="search-req">
+<pre><span class="comment">// POST /search</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"question"</span>: <span class="string">"What are the key benefits of microservices?"</span>,
+  <span class="key">"knowledge_db"</span>: <span class="string">"281e85f4-00b8-4613-b518-a3b4679e8d4c"</span>,
+  <span class="key">"top_k"</span>: <span class="number">3</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="search-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"answer"</span>: <span class="string">"Based on the documents, the key benefits of microservices include independent deployment, technology flexibility, and improved fault isolation..."</span>,
+  <span class="key">"sources"</span>: [
+    {
+      <span class="key">"doc_id"</span>: <span class="string">"a1b2c3d4-..."</span>,
+      <span class="key">"title"</span>: <span class="string">"microservices-guide.md"</span>,
+      <span class="key">"chunk"</span>: <span class="string">"Microservices architecture enables teams to deploy services independently..."</span>,
+      <span class="key">"score"</span>: <span class="number">0.89</span>
+    }
+  ],
+  <span class="key">"question"</span>: <span class="string">"What are the key benefits of microservices?"</span>,
+  <span class="key">"knowledgeDb"</span>: <span class="string">"281e85f4-00b8-4613-b518-a3b4679e8d4c"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="search-curl">
+<pre><span class="comment"># cURL example</span>
+curl -X POST \
+  https://fgbpqt2pq6.execute-api.us-east-1.amazonaws.com/prod/search \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -H <span class="string">"Authorization: Bearer &lt;idToken&gt;"</span> \
+  -d '{
+    <span class="key">"question"</span>: <span class="string">"What are the key benefits?"</span>,
+    <span class="key">"knowledge_db"</span>: <span class="string">"281e85f4-..."</span>,
+    <span class="key">"top_k"</span>: <span class="number">3</span>
+  }'</pre>
+            </div>
+            <div class="code-panel" id="search-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>KnowledgeDB ID</label>
+                  <input type="text" id="search-kdb-id" placeholder="281e85f4-00b8-4613-b518-a3b4679e8d4c">
+                </div>
+                <div class="test-field">
+                  <label>Question</label>
+                  <textarea id="search-question" placeholder="What does the document say about..."></textarea>
+                </div>
+                <div class="test-field">
+                  <label>Top K (optional)</label>
+                  <input type="number" id="search-topk" placeholder="3" value="3" min="1" max="10">
+                </div>
+                <button class="test-send" onclick="trySearch()">Send Request</button>
+                <div class="test-response" id="search-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+<script>
+async function trySearch() {
+  showLoading('search-response');
+  try {
+    const body = {
+      question: document.getElementById('search-question').value,
+      knowledge_db: document.getElementById('search-kdb-id').value,
+      top_k: parseInt(document.getElementById('search-topk').value) || 3
+    };
+    const { status, data } = await apiRequest('POST', '/search', body);
+    renderResponse('search-response', status, data);
+  } catch(e) { renderResponse('search-response', 0, { error: e.message }); }
+}
+</script>
+</body>
+</html>

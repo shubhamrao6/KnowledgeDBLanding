@@ -1,0 +1,419 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Images - KnowledgeDB API</title>
+  <meta name="description" content="KnowledgeDB API images — generate images with AI, upload with automatic vision analysis, and manage your image library.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-header"></div>
+    <div id="sidebar-nav" class="sidebar-nav"></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="top-bar" data-title="Images"></div>
+
+    <div class="page-hero">
+      <h1>Images</h1>
+      <p>Generate images with Amazon Titan Image Generator v2, upload existing images with automatic AI vision analysis (Claude), and manage your image library. All images are indexed for RAG search via companion text files.</p>
+    </div>
+
+    <div class="content-area">
+      <div class="auth-banner">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
+        <div class="text">All image endpoints require authentication. Include <code>Authorization: Bearer &lt;idToken&gt;</code> in your request headers.</div>
+      </div>
+
+      <!-- GENERATE -->
+      <div class="endpoint-block" id="generate">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Generate Image</h2>
+          <code class="endpoint-url">/images/generate</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Generate an image from a text prompt using Amazon Titan Image Generator v2. The generated image (1024x1024 PNG) is stored in S3 and indexed for search.</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>prompt</td><td>string <span class="param-required">required</span></td><td>Text description of the image to generate.</td></tr>
+                <tr><td>knowledgeDbId</td><td>string <span class="param-required">required</span></td><td>Target knowledge base ID.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response Fields (201)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>imageId</td><td>string</td><td>Unique image identifier.</td></tr>
+                <tr><td>prompt</td><td>string</td><td>Original prompt.</td></tr>
+                <tr><td>provider</td><td>string</td><td>Always <code>"aws"</code>.</td></tr>
+                <tr><td>image</td><td>string</td><td>Base64-encoded PNG image data.</td></tr>
+                <tr><td>message</td><td>string</td><td>Success confirmation.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="imggen-req">Request</button>
+              <button class="code-tab" data-target="imggen-res">Response</button>
+              <button class="code-tab test-tab" data-target="imggen-test">Test</button>
+            </div>
+            <div class="code-panel active" id="imggen-req">
+<pre><span class="comment">// POST /images/generate</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"prompt"</span>: <span class="string">"A futuristic city skyline at sunset"</span>,
+  <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-00b8-4613-b518-a3b4679e8d4c"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="imggen-res">
+<pre><span class="comment">// 201 Created</span>
+{
+  <span class="key">"imageId"</span>: <span class="string">"c3d4e5f6-a7b8-9012-cdef-123456789012"</span>,
+  <span class="key">"prompt"</span>: <span class="string">"A futuristic city skyline at sunset"</span>,
+  <span class="key">"provider"</span>: <span class="string">"aws"</span>,
+  <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-..."</span>,
+  <span class="key">"image"</span>: <span class="string">"iVBORw0KGgoAAAANSUhEUg..."</span>,
+  <span class="key">"message"</span>: <span class="string">"Image generated and stored successfully"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="imggen-test">
+              <div class="test-panel">
+                <div class="test-field"><label>KnowledgeDB ID</label><input type="text" id="imggen-kdb-id" placeholder="281e85f4-..."></div>
+                <div class="test-field"><label>Prompt</label><textarea id="imggen-prompt" placeholder="A futuristic city skyline at sunset"></textarea></div>
+                <button class="test-send" onclick="tryGenImage()">Send Request</button>
+                <div class="test-response" id="imggen-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPLOAD -->
+      <div class="endpoint-block" id="upload">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Upload Image</h2>
+          <code class="endpoint-url">/images/upload</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Upload an image file. Claude Vision automatically analyzes the image and generates a text description, which is stored as a companion file for RAG search indexing. Max size: 5MB. Supported: PNG, JPEG, GIF, WebP.</p>
+            <div class="params-title">Form Fields</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>file</td><td>file <span class="param-required">required</span></td><td>Image file to upload.</td></tr>
+                <tr><td>knowledgeDbId</td><td>string <span class="param-required">required</span></td><td>Target knowledge base ID.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response Fields (201)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>imageId</td><td>string</td><td>Unique image identifier.</td></tr>
+                <tr><td>filename</td><td>string</td><td>Original filename.</td></tr>
+                <tr><td>description</td><td>string</td><td>AI-generated image description.</td></tr>
+                <tr><td>message</td><td>string</td><td>Success confirmation.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="imgup-req">Request</button>
+              <button class="code-tab" data-target="imgup-res">Response</button>
+              <button class="code-tab" data-target="imgup-curl">cURL</button>
+              <button class="code-tab test-tab" data-target="imgup-test">Test</button>
+            </div>
+            <div class="code-panel active" id="imgup-req">
+<pre><span class="comment">// POST /images/upload</span>
+<span class="comment">// Content-Type: multipart/form-data</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+
+<span class="key">file</span>: <span class="string">&lt;binary image data&gt;</span>
+<span class="key">knowledgeDbId</span>: <span class="string">"281e85f4-..."</span></pre>
+            </div>
+            <div class="code-panel" id="imgup-res">
+<pre><span class="comment">// 201 Created</span>
+{
+  <span class="key">"imageId"</span>: <span class="string">"d4e5f6a7-b8c9-0123-defg-234567890123"</span>,
+  <span class="key">"filename"</span>: <span class="string">"architecture-diagram.png"</span>,
+  <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-..."</span>,
+  <span class="key">"description"</span>: <span class="string">"The image shows a system architecture diagram with microservices connected via an API gateway..."</span>,
+  <span class="key">"message"</span>: <span class="string">"Image uploaded and processed successfully"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="imgup-curl">
+<pre><span class="comment"># cURL example</span>
+curl -X POST \
+  https://fgbpqt2pq6.execute-api.us-east-1.amazonaws.com/prod/images/upload \
+  -H <span class="string">"Authorization: Bearer &lt;idToken&gt;"</span> \
+  -F <span class="string">"file=@./diagram.png"</span> \
+  -F <span class="string">"knowledgeDbId=281e85f4-..."</span></pre>
+            </div>
+            <div class="code-panel" id="imgup-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>KnowledgeDB ID</label>
+                  <input type="text" id="imgup-kdb-id" placeholder="281e85f4-00b8-4613-b518-a3b4679e8d4c">
+                </div>
+                <div class="test-field">
+                  <label>Image File</label>
+                  <input type="file" id="imgup-file" accept=".png,.jpg,.jpeg,.gif,.webp">
+                </div>
+                <button class="test-send" onclick="tryUploadImage()">Send Request</button>
+                <div class="test-response" id="imgup-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIST -->
+      <div class="endpoint-block" id="list">
+        <div class="endpoint-header"><span class="method-badge get">GET</span><h2>List Images</h2><code class="endpoint-url">/images</code></div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>List all images for the authenticated user. Optionally filter by knowledge base ID.</p>
+            <div class="params-title">Query Parameters</div>
+            <table class="params-table"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>knowledgeDbId</td><td>string <span class="param-optional">optional</span></td><td>Filter images by knowledge base.</td></tr>
+            </tbody></table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs"><button class="code-tab active" data-target="imglist-res">Response 200</button><button class="code-tab test-tab" data-target="imglist-test">Test</button></div>
+            <div class="code-panel active" id="imglist-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"images"</span>: [
+    {
+      <span class="key">"imageId"</span>: <span class="string">"c3d4e5f6-..."</span>,
+      <span class="key">"filename"</span>: <span class="string">""</span>,
+      <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-..."</span>,
+      <span class="key">"prompt"</span>: <span class="string">"A futuristic city skyline"</span>,
+      <span class="key">"provider"</span>: <span class="string">"aws"</span>,
+      <span class="key">"fileSize"</span>: <span class="number">524288</span>,
+      <span class="key">"createdAt"</span>: <span class="string">"2025-07-04T14:00:00.000000"</span>,
+      <span class="key">"status"</span>: <span class="string">"generated"</span>
+    }
+  ],
+  <span class="key">"count"</span>: <span class="number">1</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="imglist-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>KnowledgeDB ID <span style="opacity:0.5">(optional filter)</span></label>
+                  <input type="text" id="imglist-kdb-id" placeholder="281e85f4-00b8-4613-b518-a3b4679e8d4c">
+                </div>
+                <button class="test-send" onclick="tryListImages()">Send Request</button>
+                <div class="test-response" id="imglist-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GET IMAGE -->
+      <div class="endpoint-block" id="get">
+        <div class="endpoint-header"><span class="method-badge get">GET</span><h2>Get Image</h2><code class="endpoint-url">/images/{imageId}</code></div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Retrieve metadata for a specific image, including a pre-signed S3 download URL valid for 1 hour.</p>
+            <div class="params-title">Path Parameters</div>
+            <table class="params-table"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>imageId</td><td>string <span class="param-required">required</span></td><td>Image ID to retrieve.</td></tr>
+            </tbody></table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs"><button class="code-tab active" data-target="imgget-res">Response 200</button><button class="code-tab test-tab" data-target="imgget-test">Test</button></div>
+            <div class="code-panel active" id="imgget-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"imageId"</span>: <span class="string">"c3d4e5f6-..."</span>,
+  <span class="key">"prompt"</span>: <span class="string">"A futuristic city skyline"</span>,
+  <span class="key">"provider"</span>: <span class="string">"aws"</span>,
+  <span class="key">"fileSize"</span>: <span class="number">524288</span>,
+  <span class="key">"createdAt"</span>: <span class="string">"2025-07-04T14:00:00.000000"</span>,
+  <span class="key">"status"</span>: <span class="string">"generated"</span>,
+  <span class="key">"downloadUrl"</span>: <span class="string">"https://s3.amazonaws.com/..."</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="imgget-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>Image ID</label>
+                  <input type="text" id="imgget-id" placeholder="c3d4e5f6-a7b8-9012-cdef-123456789012">
+                </div>
+                <button class="test-send" onclick="tryGetImage()">Send Request</button>
+                <div class="test-response" id="imgget-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DELETE -->
+      <div class="endpoint-block" id="delete">
+        <div class="endpoint-header"><span class="method-badge delete">DELETE</span><h2>Delete Image</h2><code class="endpoint-url">/images/{imageId}</code></div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Permanently delete an image. Removes the image file, companion text description, and all metadata sidecars from S3. Triggers a KB sync to clean up indexed data.</p>
+            <div class="params-title">Path Parameters</div>
+            <table class="params-table"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>imageId</td><td>string <span class="param-required">required</span></td><td>Image ID to delete.</td></tr>
+            </tbody></table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs"><button class="code-tab active" data-target="imgdel-res">Response 200</button><button class="code-tab test-tab" data-target="imgdel-test">Test</button></div>
+            <div class="code-panel active" id="imgdel-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"message"</span>: <span class="string">"Image 'architecture-diagram.png' deleted successfully"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="imgdel-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>Image ID</label>
+                  <input type="text" id="imgdel-id" placeholder="c3d4e5f6-a7b8-9012-cdef-123456789012">
+                </div>
+                <button class="test-send" onclick="tryDeleteImage()">Send Request</button>
+                <div class="test-response" id="imgdel-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REINDEX -->
+      <div class="endpoint-block" id="reindex">
+        <div class="endpoint-header"><span class="method-badge post">POST</span><h2>Reindex (Regenerate) Image</h2><code class="endpoint-url">/images/reindex</code></div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Regenerate a previously generated image using its original prompt. Re-uploads the new image to S3, updates the companion text file, and triggers a KB sync. Only works for AI-generated images (not uploaded ones).</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>imageId</td><td>string <span class="param-required">required</span></td><td>ID of the generated image to regenerate.</td></tr>
+            </tbody></table>
+            <div class="info-box note">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <div>Only images that were originally generated via <code>POST /images/generate</code> can be regenerated. Uploaded images will return a <code>400</code> error.</div>
+            </div>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="imgreindex-req">Request</button>
+              <button class="code-tab" data-target="imgreindex-res">Response</button>
+              <button class="code-tab test-tab" data-target="imgreindex-test">Test</button>
+            </div>
+            <div class="code-panel active" id="imgreindex-req">
+<pre><span class="comment">// POST /images/reindex</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"imageId"</span>: <span class="string">"c3d4e5f6-a7b8-9012-cdef-123456789012"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="imgreindex-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"imageId"</span>: <span class="string">"c3d4e5f6-a7b8-9012-cdef-123456789012"</span>,
+  <span class="key">"prompt"</span>: <span class="string">"A futuristic city skyline at sunset"</span>,
+  <span class="key">"provider"</span>: <span class="string">"aws"</span>,
+  <span class="key">"message"</span>: <span class="string">"Image regenerated successfully"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="imgreindex-test">
+              <div class="test-panel">
+                <div class="test-field">
+                  <label>Image ID</label>
+                  <input type="text" id="imgreindex-id" placeholder="c3d4e5f6-a7b8-9012-cdef-123456789012">
+                </div>
+                <button class="test-send" onclick="tryReindexImage()">Send Request</button>
+                <div class="test-response" id="imgreindex-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+<script>
+async function tryGenImage() {
+  showLoading('imggen-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/images/generate', {
+      prompt: document.getElementById('imggen-prompt').value,
+      knowledgeDbId: document.getElementById('imggen-kdb-id').value
+    });
+    renderResponse('imggen-response', status, data);
+  } catch(e) { renderResponse('imggen-response', 0, { error: e.message }); }
+}
+
+async function tryUploadImage() {
+  showLoading('imgup-response');
+  try {
+    const fileInput = document.getElementById('imgup-file');
+    const kdbId = document.getElementById('imgup-kdb-id').value;
+    if (!fileInput.files[0]) { renderResponse('imgup-response', 400, { error: 'Select an image file' }); return; }
+    const formData = new FormData();
+    formData.append('file', fileInput.files[0]);
+    formData.append('knowledgeDbId', kdbId);
+    const { status, data } = await apiRequest('POST', '/images/upload', formData, true, true);
+    renderResponse('imgup-response', status, data);
+  } catch(e) { renderResponse('imgup-response', 0, { error: e.message }); }
+}
+
+async function tryListImages() {
+  showLoading('imglist-response');
+  try {
+    const kdbId = document.getElementById('imglist-kdb-id').value;
+    const path = kdbId ? '/images?knowledgeDbId=' + encodeURIComponent(kdbId) : '/images';
+    const { status, data } = await apiRequest('GET', path);
+    renderResponse('imglist-response', status, data);
+  } catch(e) { renderResponse('imglist-response', 0, { error: e.message }); }
+}
+
+async function tryGetImage() {
+  showLoading('imgget-response');
+  try {
+    const imgId = document.getElementById('imgget-id').value;
+    if (!imgId) { renderResponse('imgget-response', 400, { error: 'Enter an image ID' }); return; }
+    const { status, data } = await apiRequest('GET', '/images/' + encodeURIComponent(imgId));
+    renderResponse('imgget-response', status, data);
+  } catch(e) { renderResponse('imgget-response', 0, { error: e.message }); }
+}
+
+async function tryDeleteImage() {
+  showLoading('imgdel-response');
+  try {
+    const imgId = document.getElementById('imgdel-id').value;
+    if (!imgId) { renderResponse('imgdel-response', 400, { error: 'Enter an image ID' }); return; }
+    const { status, data } = await apiRequest('DELETE', '/images/' + encodeURIComponent(imgId));
+    renderResponse('imgdel-response', status, data);
+  } catch(e) { renderResponse('imgdel-response', 0, { error: e.message }); }
+}
+
+async function tryReindexImage() {
+  showLoading('imgreindex-response');
+  try {
+    const imgId = document.getElementById('imgreindex-id').value;
+    if (!imgId) { renderResponse('imgreindex-response', 400, { error: 'Enter an image ID' }); return; }
+    const { status, data } = await apiRequest('POST', '/images/reindex', { imageId: imgId });
+    renderResponse('imgreindex-response', status, data);
+  } catch(e) { renderResponse('imgreindex-response', 0, { error: e.message }); }
+}
+</script>
+</body>
+</html>

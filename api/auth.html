@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication - KnowledgeDB API</title>
+  <meta name="description" content="KnowledgeDB API authentication — sign up, login, refresh tokens, and manage sessions with token-based auth.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-header"></div>
+    <div id="sidebar-nav" class="sidebar-nav"></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="top-bar" data-title="Authentication"></div>
+
+    <div class="page-hero">
+      <h1>Authentication</h1>
+      <p>KnowledgeDB uses token-based authentication. Sign up, login to receive tokens, and include the <code>idToken</code> as a Bearer token in all authenticated requests.</p>
+    </div>
+
+    <div class="content-area">
+      <div class="auth-banner">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
+        <div class="text">
+          The auth flow is simple: <code>POST /auth/signup</code> → <code>POST /auth/login</code> → use the returned <code>idToken</code> as <code>Authorization: Bearer &lt;idToken&gt;</code>. Tokens expire in 1 hour. Use <code>/auth/refresh</code> to get new tokens without re-logging in.
+        </div>
+      </div>
+
+      <!-- SIGNUP -->
+      <div class="endpoint-block" id="signup">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Sign Up</h2>
+          <code class="endpoint-url">/auth/signup</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Register a new user account. After signup, the account is immediately active — no email verification step required.</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>email</td><td>string <span class="param-required">required</span></td><td>User's email address. Must be unique.</td></tr>
+                <tr><td>password</td><td>string <span class="param-required">required</span></td><td>Password. Must include uppercase, lowercase, number, and special character.</td></tr>
+                <tr><td>firstName</td><td>string <span class="param-required">required</span></td><td>User's first name.</td></tr>
+                <tr><td>lastName</td><td>string <span class="param-required">required</span></td><td>User's last name.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response Fields</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>message</td><td>string</td><td>Success confirmation message.</td></tr>
+                <tr><td>userId</td><td>string</td><td>Unique user identifier (UUID).</td></tr>
+              </tbody>
+            </table>
+            <div class="info-box note">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <div>If the email is already registered, you'll receive a <code>400</code> error with <code>"User already exists"</code>.</div>
+            </div>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="signup-req">Request</button>
+              <button class="code-tab" data-target="signup-res">Response</button>
+              <button class="code-tab" data-target="signup-curl">cURL</button>
+              <button class="code-tab test-tab" data-target="signup-test">Test</button>
+            </div>
+            <div class="code-panel active" id="signup-req"><pre><span class="comment">// POST /auth/signup</span>
+{
+  <span class="key">"email"</span>: <span class="string">"[email]"</span>,
+  <span class="key">"password"</span>: <span class="string">"[password]"</span>,
+  <span class="key">"firstName"</span>: <span class="string">"[name]"</span>,
+  <span class="key">"lastName"</span>: <span class="string">"[name]"</span>
+}</pre></div>
+            <div class="code-panel" id="signup-res"><pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"message"</span>: <span class="string">"User registered successfully. Please verify your email."</span>,
+  <span class="key">"userId"</span>: <span class="string">"d4f884e8-c071-7040-93cf-ce8053c7c658"</span>
+}</pre></div>
+            <div class="code-panel" id="signup-curl"><pre><span class="comment"># cURL example</span>
+curl -X POST \
+  https://fgbpqt2pq6.execute-api.us-east-1.amazonaws.com/prod/auth/signup \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d '{
+    <span class="key">"email"</span>: <span class="string">"[email]"</span>,
+    <span class="key">"password"</span>: <span class="string">"[password]"</span>,
+    <span class="key">"firstName"</span>: <span class="string">"[name]"</span>,
+    <span class="key">"lastName"</span>: <span class="string">"[name]"</span>
+  }'</pre></div>
+            <div class="code-panel" id="signup-test">
+              <div class="test-panel">
+                <div class="test-field"><label>Email</label><input type="email" id="signup-email" placeholder="[email]"></div>
+                <div class="test-field"><label>Password</label><input type="password" id="signup-password" placeholder="[password]"></div>
+                <div class="test-field"><label>First Name</label><input type="text" id="signup-first" placeholder="[name]"></div>
+                <div class="test-field"><label>Last Name</label><input type="text" id="signup-last" placeholder="[name]"></div>
+                <button class="test-send" onclick="trySignup()">Send Request</button>
+                <div class="test-response" id="signup-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGIN -->
+      <div class="endpoint-block" id="login">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Login</h2>
+          <code class="endpoint-url">/auth/login</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Authenticate with email and password. Returns access, ID, and refresh tokens along with user profile information. The <code>idToken</code> is used for all authenticated API requests.</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>email</td><td>string <span class="param-required">required</span></td><td>Registered email address.</td></tr>
+                <tr><td>password</td><td>string <span class="param-required">required</span></td><td>Account password.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response Fields</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>accessToken</td><td>string</td><td>JWT access token.</td></tr>
+                <tr><td>idToken</td><td>string</td><td>JWT ID token — use this as your Bearer token.</td></tr>
+                <tr><td>refreshToken</td><td>string</td><td>Long-lived token for refreshing sessions.</td></tr>
+                <tr><td>expiresIn</td><td>number</td><td>Token lifetime in seconds (3600 = 1 hour).</td></tr>
+                <tr><td>tokenType</td><td>string</td><td>Always <code>"Bearer"</code>.</td></tr>
+                <tr><td>user</td><td>object</td><td>User profile: <code>userId</code>, <code>email</code>, <code>firstName</code>, <code>lastName</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="login-req">Request</button>
+              <button class="code-tab" data-target="login-res">Response</button>
+              <button class="code-tab" data-target="login-curl">cURL</button>
+              <button class="code-tab test-tab" data-target="login-test">Test</button>
+            </div>
+            <div class="code-panel active" id="login-req"><pre><span class="comment">// POST /auth/login</span>
+{
+  <span class="key">"email"</span>: <span class="string">"[email]"</span>,
+  <span class="key">"password"</span>: <span class="string">"[password]"</span>
+}</pre></div>
+            <div class="code-panel" id="login-res"><pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"accessToken"</span>: <span class="string">"eyJraWQiOiJRMTNa..."</span>,
+  <span class="key">"idToken"</span>: <span class="string">"eyJraWQiOiJTOXhs..."</span>,
+  <span class="key">"refreshToken"</span>: <span class="string">"eyJjdHkiOiJKV1Qi..."</span>,
+  <span class="key">"expiresIn"</span>: <span class="number">3600</span>,
+  <span class="key">"tokenType"</span>: <span class="string">"Bearer"</span>,
+  <span class="key">"user"</span>: {
+    <span class="key">"userId"</span>: <span class="string">"f4789468-7021-7082-0c88-a33407efab01"</span>,
+    <span class="key">"email"</span>: <span class="string">"[email]"</span>,
+    <span class="key">"firstName"</span>: <span class="string">"[name]"</span>,
+    <span class="key">"lastName"</span>: <span class="string">"[name]"</span>
+  }
+}</pre></div>
+            <div class="code-panel" id="login-curl"><pre><span class="comment"># cURL example</span>
+curl -X POST \
+  https://fgbpqt2pq6.execute-api.us-east-1.amazonaws.com/prod/auth/login \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -d '{
+    <span class="key">"email"</span>: <span class="string">"[email]"</span>,
+    <span class="key">"password"</span>: <span class="string">"[password]"</span>
+  }'</pre></div>
+            <div class="code-panel" id="login-test">
+              <div class="test-panel">
+                <div class="test-field"><label>Email</label><input type="email" id="login-email" placeholder="[email]"></div>
+                <div class="test-field"><label>Password</label><input type="password" id="login-password" placeholder="[password]"></div>
+                <button class="test-send" onclick="tryLogin()">Send Request</button>
+                <div class="test-response" id="login-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REFRESH -->
+      <div class="endpoint-block" id="refresh">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Refresh Token</h2>
+          <code class="endpoint-url">/auth/refresh</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Exchange a valid refresh token for new access and ID tokens without requiring the user to re-enter credentials. Use this when your tokens expire (after 1 hour).</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>refreshToken</td><td>string <span class="param-required">required</span></td><td>The refresh token received from login.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response Fields</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>accessToken</td><td>string</td><td>New JWT access token.</td></tr>
+                <tr><td>idToken</td><td>string</td><td>New JWT ID token.</td></tr>
+                <tr><td>expiresIn</td><td>number</td><td>Token lifetime in seconds.</td></tr>
+                <tr><td>tokenType</td><td>string</td><td>Always <code>"Bearer"</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="refresh-req">Request</button>
+              <button class="code-tab" data-target="refresh-res">Response</button>
+              <button class="code-tab test-tab" data-target="refresh-test">Test</button>
+            </div>
+            <div class="code-panel active" id="refresh-req"><pre><span class="comment">// POST /auth/refresh</span>
+{
+  <span class="key">"refreshToken"</span>: <span class="string">"eyJjdHkiOiJKV1Qi..."</span>
+}</pre></div>
+            <div class="code-panel" id="refresh-res"><pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"accessToken"</span>: <span class="string">"eyJraWQiOiJRMTNa..."</span>,
+  <span class="key">"idToken"</span>: <span class="string">"eyJraWQiOiJTOXhs..."</span>,
+  <span class="key">"expiresIn"</span>: <span class="number">3600</span>,
+  <span class="key">"tokenType"</span>: <span class="string">"Bearer"</span>
+}</pre></div>
+            <div class="code-panel" id="refresh-test">
+              <div class="test-panel">
+                <div class="test-field"><label>Refresh Token</label><input type="text" id="refresh-token" placeholder="Paste refresh token from login response"></div>
+                <button class="test-send" onclick="tryRefresh()">Send Request</button>
+                <div class="test-response" id="refresh-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOGOUT -->
+      <div class="endpoint-block" id="logout">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Logout</h2>
+          <code class="endpoint-url">/auth/logout</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Invalidate the current session by revoking the refresh token. Requires a valid Bearer token in the Authorization header.</p>
+            <div class="params-title">Headers</div>
+            <table class="params-table">
+              <thead><tr><th>Header</th><th>Value</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>Authorization</td><td>Bearer &lt;idToken&gt;</td><td>Valid ID token from login.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>refreshToken</td><td>string <span class="param-required">required</span></td><td>The refresh token to revoke.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>message</td><td>string</td><td><code>"Successfully logged out"</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="logout-req">Request</button>
+              <button class="code-tab" data-target="logout-res">Response</button>
+              <button class="code-tab test-tab" data-target="logout-test">Test</button>
+            </div>
+            <div class="code-panel active" id="logout-req"><pre><span class="comment">// POST /auth/logout</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"refreshToken"</span>: <span class="string">"eyJjdHkiOiJKV1Qi..."</span>
+}</pre></div>
+            <div class="code-panel" id="logout-res"><pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"message"</span>: <span class="string">"Successfully logged out"</span>
+}</pre></div>
+            <div class="code-panel" id="logout-test">
+              <div class="test-panel">
+                <div class="test-field"><label>Refresh Token</label><input type="text" id="logout-token" placeholder="Paste refresh token to revoke"></div>
+                <button class="test-send" onclick="tryLogout()">Send Request</button>
+                <div class="test-response" id="logout-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+<script>
+async function trySignup() {
+  showLoading('signup-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/auth/signup', {
+      email: document.getElementById('signup-email').value,
+      password: document.getElementById('signup-password').value,
+      firstName: document.getElementById('signup-first').value,
+      lastName: document.getElementById('signup-last').value
+    }, false);
+    renderResponse('signup-response', status, data);
+  } catch(e) { renderResponse('signup-response', 0, { error: e.message }); }
+}
+async function tryLogin() {
+  showLoading('login-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/auth/login', {
+      email: document.getElementById('login-email').value,
+      password: document.getElementById('login-password').value
+    }, false);
+    if (status === 200 && data.idToken) {
+      setTokens(data);
+      updateAuthIndicator();
+      // Auto-fill refresh token fields after login
+      if (data.refreshToken) {
+        document.getElementById('refresh-token').value = data.refreshToken;
+        document.getElementById('logout-token').value = data.refreshToken;
+      }
+    }
+    renderResponse('login-response', status, data);
+  } catch(e) { renderResponse('login-response', 0, { error: e.message }); }
+}
+async function tryRefresh() {
+  showLoading('refresh-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/auth/refresh', {
+      refreshToken: document.getElementById('refresh-token').value
+    }, false);
+    if (status === 200 && data.idToken) {
+      setTokens(data);
+      updateAuthIndicator();
+    }
+    renderResponse('refresh-response', status, data);
+  } catch(e) { renderResponse('refresh-response', 0, { error: e.message }); }
+}
+async function tryLogout() {
+  showLoading('logout-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/auth/logout', {
+      refreshToken: document.getElementById('logout-token').value
+    }, true);
+    if (status === 200) {
+      clearTokens();
+      updateAuthIndicator();
+      document.getElementById('refresh-token').value = '';
+      document.getElementById('logout-token').value = '';
+    }
+    renderResponse('logout-response', status, data);
+  } catch(e) { renderResponse('logout-response', 0, { error: e.message }); }
+}
+// Auto-fill refresh token fields from localStorage on page load
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = getRefreshToken();
+  if (saved) {
+    document.getElementById('refresh-token').value = saved;
+    document.getElementById('logout-token').value = saved;
+  }
+});
+</script>
+</body>
+</html>

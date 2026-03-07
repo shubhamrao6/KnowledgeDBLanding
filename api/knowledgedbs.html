@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Bases - KnowledgeDB API</title>
+  <meta name="description" content="KnowledgeDB API knowledge bases — create, list, and delete isolated document containers for multi-tenant RAG search.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-header"></div>
+    <div id="sidebar-nav" class="sidebar-nav"></div>
+  </nav>
+  <main class="main-content">
+    <div class="top-bar" data-title="Knowledge Bases"></div>
+    <div class="page-hero">
+      <h1>Knowledge Bases</h1>
+      <p>KnowledgeDBs are isolated containers for your documents and images. Each knowledge base has its own namespace, enabling multi-tenant document management and scoped AI search.</p>
+    </div>
+    <div class="content-area">
+      <div class="auth-banner">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
+        <div class="text">All KnowledgeDB endpoints require authentication. Include <code>Authorization: Bearer &lt;idToken&gt;</code> in your request headers.</div>
+      </div>
+
+      <!-- CREATE -->
+      <div class="endpoint-block" id="create">
+        <div class="endpoint-header"><span class="method-badge post">POST</span><h2>Create KnowledgeDB</h2><code class="endpoint-url">/knowledgedbs</code></div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Create a new knowledge base. Each KnowledgeDB gets a unique namespace scoped to your user account. Names must be unique per user.</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>name</td><td>string <span class="param-required">required</span></td><td>Unique name for the knowledge base.</td></tr>
+              <tr><td>description</td><td>string <span class="param-optional">optional</span></td><td>Description of the knowledge base.</td></tr>
+            </tbody></table>
+            <div class="params-title">Response Fields</div>
+            <table class="params-table"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>knowledgeDbId</td><td>string</td><td>Unique identifier (UUID) for the created knowledge base.</td></tr>
+              <tr><td>name</td><td>string</td><td>Name of the knowledge base.</td></tr>
+              <tr><td>description</td><td>string</td><td>Description provided.</td></tr>
+              <tr><td>namespace</td><td>string</td><td>Internal namespace: <code>{userId}__{knowledgeDbId}</code>.</td></tr>
+              <tr><td>message</td><td>string</td><td>Success confirmation.</td></tr>
+            </tbody></table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="create-req">Request</button>
+              <button class="code-tab" data-target="create-res">Response</button>
+              <button class="code-tab" data-target="create-curl">cURL</button>
+              <button class="code-tab test-tab" data-target="create-test">Test</button>
+            </div>
+            <div class="code-panel active" id="create-req"><pre><span class="comment">// POST /knowledgedbs</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"name"</span>: <span class="string">"test-docs-2"</span>,
+  <span class="key">"description"</span>: <span class="string">"Test document collection"</span>
+}</pre></div>
+            <div class="code-panel" id="create-res"><pre><span class="comment">// 201 Created</span>
+{
+  <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-00b8-4613-b518-a3b4679e8d4c"</span>,
+  <span class="key">"name"</span>: <span class="string">"test-docs-2"</span>,
+  <span class="key">"description"</span>: <span class="string">"Test document collection"</span>,
+  <span class="key">"namespace"</span>: <span class="string">"f4789468-7021-...281e85f4-00b8-..."</span>,
+  <span class="key">"message"</span>: <span class="string">"KnowledgeDB created successfully"</span>
+}</pre></div>
+            <div class="code-panel" id="create-curl"><pre><span class="comment"># cURL example</span>
+curl -X POST \
+  https://fgbpqt2pq6.execute-api.us-east-1.amazonaws.com/prod/knowledgedbs \
+  -H <span class="string">"Content-Type: application/json"</span> \
+  -H <span class="string">"Authorization: Bearer &lt;idToken&gt;"</span> \
+  -d '{ "name": "my-docs", "description": "My document collection" }'</pre></div>
+            <div class="code-panel" id="create-test">
+              <div class="test-panel">
+                <div class="test-field"><label>Name</label><input type="text" id="create-name" placeholder="my-knowledge-base"></div>
+                <div class="test-field"><label>Description</label><input type="text" id="create-desc" placeholder="A collection of technical docs"></div>
+                <button class="test-send" onclick="tryCreateKdb()">Send Request</button>
+                <div class="test-response" id="create-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIST -->
+      <div class="endpoint-block" id="list">
+        <div class="endpoint-header"><span class="method-badge get">GET</span><h2>List KnowledgeDBs</h2><code class="endpoint-url">/knowledgedbs</code></div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Retrieve all knowledge bases belonging to the authenticated user. Returns an array of KnowledgeDB objects with metadata including document counts.</p>
+            <div class="params-title">Response Fields</div>
+            <table class="params-table"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>knowledgedbs</td><td>array</td><td>Array of KnowledgeDB objects.</td></tr>
+              <tr><td>count</td><td>number</td><td>Total number of knowledge bases.</td></tr>
+            </tbody></table>
+            <div class="params-title">KnowledgeDB Object</div>
+            <table class="params-table"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>knowledgeDbId</td><td>string</td><td>Unique identifier.</td></tr>
+              <tr><td>name</td><td>string</td><td>Knowledge base name.</td></tr>
+              <tr><td>description</td><td>string</td><td>Description.</td></tr>
+              <tr><td>createdAt</td><td>string</td><td>ISO 8601 creation timestamp.</td></tr>
+              <tr><td>documentCount</td><td>number</td><td>Number of documents in this knowledge base.</td></tr>
+              <tr><td>namespace</td><td>string</td><td>Internal namespace identifier.</td></tr>
+            </tbody></table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="list-req">Request</button>
+              <button class="code-tab" data-target="list-res">Response</button>
+              <button class="code-tab test-tab" data-target="list-test">Test</button>
+            </div>
+            <div class="code-panel active" id="list-req"><pre><span class="comment">// GET /knowledgedbs</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span></pre></div>
+            <div class="code-panel" id="list-res"><pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"knowledgedbs"</span>: [
+    {
+      <span class="key">"knowledgeDbId"</span>: <span class="string">"281e85f4-00b8-4613-b518-a3b4679e8d4c"</span>,
+      <span class="key">"name"</span>: <span class="string">"test-docs-2"</span>,
+      <span class="key">"description"</span>: <span class="string">"Test document collection"</span>,
+      <span class="key">"createdAt"</span>: <span class="string">"2025-07-04T11:51:59.000000"</span>,
+      <span class="key">"documentCount"</span>: <span class="number">3</span>,
+      <span class="key">"namespace"</span>: <span class="string">"f4789468-...281e85f4-..."</span>
+    }
+  ],
+  <span class="key">"count"</span>: <span class="number">1</span>
+}</pre></div>
+            <div class="code-panel" id="list-test">
+              <div class="test-panel">
+                <button class="test-send" onclick="tryListKdb()">Send Request</button>
+                <div class="test-response" id="list-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DELETE -->
+      <div class="endpoint-block" id="delete">
+        <div class="endpoint-header"><span class="method-badge delete">DELETE</span><h2>Delete KnowledgeDB</h2><code class="endpoint-url">/knowledgedbs/{knowledgeDbId}</code></div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Permanently delete a knowledge base and all its associated documents, images, and vector embeddings. This action is irreversible.</p>
+            <div class="params-title">Path Parameters</div>
+            <table class="params-table"><thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>knowledgeDbId</td><td>string <span class="param-required">required</span></td><td>ID of the knowledge base to delete.</td></tr>
+            </tbody></table>
+            <div class="params-title">Response Fields</div>
+            <table class="params-table"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>
+              <tr><td>message</td><td>string</td><td>Confirmation message with the deleted KB name.</td></tr>
+              <tr><td>deletedDocuments</td><td>number</td><td>Number of S3 objects deleted.</td></tr>
+            </tbody></table>
+            <div class="info-box warning">
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <div>This permanently deletes the knowledge base, all documents, all images, and all indexed vector data. This cannot be undone.</div>
+            </div>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="delete-req">Request</button>
+              <button class="code-tab" data-target="delete-res">Response</button>
+              <button class="code-tab test-tab" data-target="delete-test">Test</button>
+            </div>
+            <div class="code-panel active" id="delete-req"><pre><span class="comment">// DELETE /knowledgedbs/{knowledgeDbId}</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span></pre></div>
+            <div class="code-panel" id="delete-res"><pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"message"</span>: <span class="string">"KnowledgeDB 'test-docs-2' and all associated documents deleted successfully"</span>,
+  <span class="key">"deletedDocuments"</span>: <span class="number">6</span>
+}</pre></div>
+            <div class="code-panel" id="delete-test">
+              <div class="test-panel">
+                <div class="test-field"><label>KnowledgeDB ID</label><input type="text" id="delete-kdb-id" placeholder="281e85f4-00b8-4613-b518-a3b4679e8d4c"></div>
+                <button class="test-send" onclick="tryDeleteKdb()">Send Request</button>
+                <div class="test-response" id="delete-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+<script>
+async function tryCreateKdb() {
+  showLoading('create-response');
+  try { const { status, data } = await apiRequest('POST', '/knowledgedbs', { name: document.getElementById('create-name').value, description: document.getElementById('create-desc').value }); renderResponse('create-response', status, data); } catch(e) { renderResponse('create-response', 0, { error: e.message }); }
+}
+async function tryListKdb() {
+  showLoading('list-response');
+  try { const { status, data } = await apiRequest('GET', '/knowledgedbs'); renderResponse('list-response', status, data); } catch(e) { renderResponse('list-response', 0, { error: e.message }); }
+}
+async function tryDeleteKdb() {
+  showLoading('delete-response');
+  try { const id = document.getElementById('delete-kdb-id').value; const { status, data } = await apiRequest('DELETE', `/knowledgedbs/${id}`); renderResponse('delete-response', status, data); } catch(e) { renderResponse('delete-response', 0, { error: e.message }); }
+}
+</script>
+</body>
+</html>

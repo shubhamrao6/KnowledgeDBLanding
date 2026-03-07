@@ -1,576 +1,231 @@
 <!DOCTYPE html>
-
 <html lang="en" class="no-js">
-   
-    <head>
-        <meta charset="utf-8"/>
-        <title>KnowledgeDB - LLMs for Everyone</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1" name="viewport"/>
-        <meta content="KnowledgeDB - Your one-stop-shop for creating custom LLM applications with ease." name="description"/>
-        <meta content="KnowledgeDB" name="author"/>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-        <style>
-        body { font-family: 'Poppins', sans-serif; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', sans-serif; font-weight: 600; }
-        .container { max-width: 1600px; }
-        </style>
-        <link href="vendor/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/animate.css" rel="stylesheet">
-        <link href="vendor/swiper/css/swiper.min.css" rel="stylesheet" type="text/css"/>
-        <link href="css/layout.css" rel="stylesheet" type="text/css"/>
-        <link rel="icon" type="image/svg+xml" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.ico"/>
-        <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
-        <meta name="theme-color" content="#2c3e50">
-    </head>
-   
-  
-    <body id="body" data-spy="scroll" data-target=".header">
-
-          <header class="header navbar-fixed-top">
-              <nav class="navbar" role="navigation">
-                <div class="container">
-                      <div class="menu-container js_nav-item">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="toggle-icon"></span>
-                        </button>
-
-                          <div class="logo">
-                            <a class="logo-wrap" href="#body" style="text-decoration: none; display: flex; align-items: center; height: 100%;">
-                                <h2 style="margin: 0; color: #2c3e50; font-weight: 700; font-size: 32px; line-height: 1; font-family: 'Orbitron', monospace;">Knowledge<span style="color: #e74c3c; font-size: 36px; font-weight: 900;">DB</span></h2>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="collapse navbar-collapse nav-collapse">
-					
-					<!--div class="language-switcher">
-					  <ul class="nav-lang">
-                        <li><a class="active" href="#">EN</a></li>
-					    <li><a href="#">DE</a></li>
-						<li><a href="#">FR</a></li>
-					  </ul>
-					</div---> 
-					
-                        <div class="menu-container">
-                            <ul class="nav navbar-nav navbar-nav-right">
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#body">Home</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#about">Features</a></li>
-								<li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#services">Solutions</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#showcase">Showcase</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#pricing">Pricing</a></li>
-                                <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#contact">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
+<head>
+    <meta charset="utf-8"/>
+    <title>KnowledgeDB - LLMs for Everyone</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta content="KnowledgeDB - Your one-stop-shop for creating custom LLM applications with ease." name="description"/>
+    <meta content="KnowledgeDB" name="author"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="vendor/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="vendor/swiper/css/swiper.min.css" rel="stylesheet" type="text/css"/>
+    <link href="css/layout.css" rel="stylesheet" type="text/css"/>
+    <link href="css/modern.css" rel="stylesheet" type="text/css"/>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.svg">
+    <meta name="theme-color" content="#0a0a0f">
+    <script>(function(){var t=localStorage.getItem('kdb_theme')||'dark';document.documentElement.setAttribute('data-theme',t);})();</script>
+</head>
+<body id="body" data-spy="scroll" data-target=".header">
+<header class="header navbar-fixed-top">
+    <nav class="navbar" role="navigation">
+        <div class="container">
+            <div class="menu-container js_nav-item">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="toggle-icon"></span>
+                </button>
+                <div class="logo">
+                    <a class="logo-wrap" href="#body" style="text-decoration:none;display:flex;align-items:center;gap:8px;height:100%">
+                        <svg viewBox="0 0 32 32" fill="none" style="width:30px;height:30px;flex-shrink:0"><defs><linearGradient id="ng1" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e74c3c"/><stop offset="100%" stop-color="#ff6b6b"/></linearGradient><linearGradient id="ng2" x1="0" y1="32" x2="32" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2c3e50"/><stop offset="100%" stop-color="#e74c3c"/></linearGradient><linearGradient id="ng3" x1="16" y1="2" x2="16" y2="14" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#e74c3c" stop-opacity="0.3"/></linearGradient></defs><ellipse cx="16" cy="18" rx="9" ry="3.2" stroke="url(#ng1)" stroke-width="1.6"/><path d="M7 18v7.5c0 1.77 4 3.2 9 3.2s9-1.43 9-3.2V18" stroke="url(#ng1)" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="16" cy="25.5" rx="9" ry="3.2" stroke="url(#ng1)" stroke-width="1.6"/><path d="M7 21.8c0 1.77 4 3.2 9 3.2s9-1.43 9-3.2" stroke="url(#ng2)" stroke-width="1" stroke-linecap="round" opacity="0.45"/><path d="M16 14.8 L16 6" stroke="url(#ng3)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 11.5 L11 7.5" stroke="url(#ng3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="6.8" r="1.5" fill="url(#ng1)" opacity="0.85"/><path d="M16 11.5 L21 7.5" stroke="url(#ng3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="22" cy="6.8" r="1.5" fill="url(#ng1)" opacity="0.85"/><circle cx="16" cy="4.5" r="2" fill="url(#ng1)"/><path d="M10 6.8 L6.5 4" stroke="url(#ng2)" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/><circle cx="5.8" cy="3.3" r="1" fill="url(#ng2)" opacity="0.55"/><path d="M22 6.8 L25.5 4" stroke="url(#ng2)" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/><circle cx="26.2" cy="3.3" r="1" fill="url(#ng2)" opacity="0.55"/><circle cx="12.5" cy="18" r="1" fill="#ff6b6b" opacity="0.7"/><circle cx="19.5" cy="18" r="1" fill="#e74c3c" opacity="0.7"/></svg>
+                        <h2 style="margin:0;font-weight:700;font-size:26px;line-height:1;font-family:'Orbitron',monospace">Knowledge<span style="font-size:30px;font-weight:900">DB</span></h2>
+                    </a>
                 </div>
-            </nav>
-			</header>
-       
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <div class="container">
-                <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                </ol>
             </div>
-
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img class="img-responsive" src="img/1920x1080/01.jpg" alt="Slider Image">
-                    <div class="container">
-                        <div class="carousel-centered">
-                            <div class="margin-b-40">
-                                <h3 class="carousel-title">Build LLM Apps Effortlessly</h3>
-                                <p class="color-white">Transform your ideas into powerful AI applications with KnowledgeDB <br/> Your complete platform for custom LLM development</p>
-                            </div>
-                            <a href="#pricing" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Get Started</a>
-                        </div>
-                    </div>
+            <div class="collapse navbar-collapse nav-collapse">
+                <div class="menu-container">
+                    <ul class="nav navbar-nav navbar-nav-right">
+                        <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#body">Home</a></li>
+                        <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#about">Features</a></li>
+                        <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#services">Solutions</a></li>
+                        <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#showcase">Showcase</a></li>
+                        <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#pricing">Pricing</a></li>
+                        <li class="js_nav-item nav-item"><a class="nav-item-child nav-item-hover" href="#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-item-child nav-item-hover" href="api/index.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px">API Docs <i class="fas fa-external-link-alt" style="font-size:10px;opacity:0.7"></i></a></li>
+                        <li class="nav-item"><button class="theme-toggle-nav" onclick="toggleTheme()" title="Toggle light/dark mode"><svg viewBox="0 0 24 24" id="theme-icon-sun" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg viewBox="0 0 24 24" id="theme-icon-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button></li>
+                    </ul>
                 </div>
-                <div class="item">
-                    <img class="img-responsive" src="img/1920x1080/02.jpg" alt="Slider Image">
-                    <div class="container">
-                        <div class="carousel-centered">
-                            <div class="margin-b-40">
-                                <h2 class="carousel-title">LLMs for Everyone</h2>
-                                <p class="color-white">No coding required - Create, deploy, and scale your AI solutions <br/> with our intuitive drag-and-drop interface</p>
-                            </div>
-                            <a href="#about" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Learn More</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <div class="container">
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        </ol>
+    </div>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img class="img-responsive" src="img/1920x1080/01.jpg" alt="Slider Image">
+            <div class="container"><div class="carousel-centered"><div class="margin-b-40">
+                <h3 class="carousel-title">Build LLM Apps Effortlessly</h3>
+                <p class="color-white">Transform your ideas into powerful AI applications with KnowledgeDB <br/> Your complete platform for custom LLM development</p>
+            </div><a href="#pricing" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Get Started</a></div></div>
+        </div>
+        <div class="item">
+            <img class="img-responsive" src="img/1920x1080/02.jpg" alt="Slider Image">
+            <div class="container"><div class="carousel-centered"><div class="margin-b-40">
+                <h2 class="carousel-title">LLMs for Everyone</h2>
+                <p class="color-white">No coding required - Create, deploy, and scale your AI solutions <br/> with our intuitive drag-and-drop interface</p>
+            </div><a href="#about" class="btn-theme btn-theme-sm btn-white-brd text-uppercase">Learn More</a></div></div>
+        </div>
+    </div>
+</div>
+<div id="about">
+    <div class="content-lg container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 sm-margin-b-30"><div class="feature-card"><i class="fas fa-code"></i><h2>No-Code Builder</h2><p>Create sophisticated LLM applications without writing a single line of code. Our visual interface makes AI development accessible to everyone.</p></div></div>
+            <div class="col-md-4 col-sm-4 sm-margin-b-30"><div class="feature-card"><i class="fas fa-rocket"></i><h2>Instant Deployment</h2><p>Deploy your LLM applications instantly to the cloud with one click. Scale automatically based on demand with our robust infrastructure.</p></div></div>
+            <div class="col-md-4 col-sm-4 sm-margin-b-30"><div class="feature-card"><i class="fas fa-shield-alt"></i><h2>Enterprise Ready</h2><p>Built for scale with enterprise-grade security, compliance, and support. Integrate seamlessly with your existing workflows and systems.</p></div></div>
+        </div>
+    </div>
+    <div class="bg-color-sky-light">
+        <div class="content-lg container">
+            <div class="row">
+                <div class="col-md-5 col-sm-5 md-margin-b-60">
+                    <div class="margin-t-50 margin-b-30">
+                        <h2 style="display:flex;align-items:center;gap:12px"><svg viewBox="0 0 32 32" fill="none" style="width:32px;height:32px;flex-shrink:0"><defs><linearGradient id="wg1" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e74c3c"/><stop offset="100%" stop-color="#ff6b6b"/></linearGradient><linearGradient id="wg2" x1="0" y1="32" x2="32" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2c3e50"/><stop offset="100%" stop-color="#e74c3c"/></linearGradient><linearGradient id="wg3" x1="16" y1="2" x2="16" y2="14" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#e74c3c" stop-opacity="0.3"/></linearGradient></defs><ellipse cx="16" cy="18" rx="9" ry="3.2" stroke="url(#wg1)" stroke-width="1.6"/><path d="M7 18v7.5c0 1.77 4 3.2 9 3.2s9-1.43 9-3.2V18" stroke="url(#wg1)" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="16" cy="25.5" rx="9" ry="3.2" stroke="url(#wg1)" stroke-width="1.6"/><path d="M7 21.8c0 1.77 4 3.2 9 3.2s9-1.43 9-3.2" stroke="url(#wg2)" stroke-width="1" stroke-linecap="round" opacity="0.45"/><path d="M16 14.8 L16 6" stroke="url(#wg3)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 11.5 L11 7.5" stroke="url(#wg3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="6.8" r="1.5" fill="url(#wg1)" opacity="0.85"/><path d="M16 11.5 L21 7.5" stroke="url(#wg3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="22" cy="6.8" r="1.5" fill="url(#wg1)" opacity="0.85"/><circle cx="16" cy="4.5" r="2" fill="url(#wg1)"/><path d="M10 6.8 L6.5 4" stroke="url(#wg2)" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/><circle cx="5.8" cy="3.3" r="1" fill="url(#wg2)" opacity="0.55"/><path d="M22 6.8 L25.5 4" stroke="url(#wg2)" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/><circle cx="26.2" cy="3.3" r="1" fill="url(#wg2)" opacity="0.55"/><circle cx="12.5" cy="18" r="1" fill="#ff6b6b" opacity="0.7"/><circle cx="19.5" cy="18" r="1" fill="#e74c3c" opacity="0.7"/></svg> Why KnowledgeDB?</h2>
+                        <p>We democratize AI development by making LLM application creation accessible to everyone. Whether you're a startup, enterprise, or individual developer, our platform provides the tools you need to build, deploy, and scale intelligent applications without the complexity.</p>
+                    </div>
+                    <a href="#contact" class="btn-theme btn-theme-sm btn-white-bg text-uppercase">Contact Us</a>
+                </div>
+                <div class="col-md-7 col-sm-7">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="accordion-card">
+                            <div class="panel-heading" role="tab" id="headingOne"><h3 class="panel-title"><i class="fas fa-brain"></i><a class="panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Pre-trained Models</a></h3></div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne"><div class="panel-body">Access a comprehensive library of pre-trained language models including GPT, BERT, and custom domain-specific models ready for immediate use in your applications.</div></div>
+                        </div>
+                        <div class="accordion-card">
+                            <div class="panel-heading" role="tab" id="headingTwo"><h3 class="panel-title"><i class="fas fa-cogs"></i><a class="collapsed panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Custom Training</a></h3></div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo"><div class="panel-body">Fine-tune models with your own data to create specialized AI applications tailored to your specific use case and industry requirements.</div></div>
+                        </div>
+                        <div class="accordion-card">
+                            <div class="panel-heading" role="tab" id="headingThree"><h3 class="panel-title"><i class="fas fa-plug"></i><a class="collapsed panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">API Integration</a></h3></div>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree"><div class="panel-body">Seamlessly integrate your LLM applications with existing systems through our robust REST APIs and SDKs for popular programming languages.<br><a href="api/index.html" target="_blank">Explore the API Documentation <i class="fas fa-arrow-right" style="font-size:12px"></i></a></div></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--========== SLIDER ==========-->
+    </div>
+</div>
 
-        <!--========== PAGE LAYOUT ==========-->
-        <!-- About -->
-        <div id="about">
-            <div class="content-lg container">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 sm-margin-b-30">
-                        <div class="text-center" style="padding: 40px 20px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 15px; color: white; height: 280px; display: flex; flex-direction: column; justify-content: center;">
-                            <i class="fas fa-code" style="font-size: 48px; margin-bottom: 20px; color: #e74c3c;"></i>
-                            <h2 style="color: white; margin-bottom: 20px;">No-Code Builder</h2>
-                            <p style="color: rgba(255,255,255,0.9);">Create sophisticated LLM applications without writing a single line of code. Our visual interface makes AI development accessible to everyone.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 sm-margin-b-30">
-                        <div class="text-center" style="padding: 40px 20px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 15px; color: white; height: 280px; display: flex; flex-direction: column; justify-content: center;">
-                            <i class="fas fa-rocket" style="font-size: 48px; margin-bottom: 20px; color: #e74c3c;"></i>
-                            <h2 style="color: white; margin-bottom: 20px;">Instant Deployment</h2>
-                            <p style="color: rgba(255,255,255,0.9);">Deploy your LLM applications instantly to the cloud with one click. Scale automatically based on demand with our robust infrastructure.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 sm-margin-b-30">
-                        <div class="text-center" style="padding: 40px 20px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 15px; color: white; height: 280px; display: flex; flex-direction: column; justify-content: center;">
-                            <i class="fas fa-shield-alt" style="font-size: 48px; margin-bottom: 20px; color: #e74c3c;"></i>
-                            <h2 style="color: white; margin-bottom: 20px;">Enterprise Ready</h2>
-                            <p style="color: rgba(255,255,255,0.9);">Built for scale with enterprise-grade security, compliance, and support. Integrate seamlessly with your existing workflows and systems.</p>
-                        </div>
-                    </div>
+<div id="pricing">
+    <div class="bg-color-sky-light">
+        <div class="content-lg container">
+            <div class="row">
+                <div class="col-sm-4 sm-margin-b-30"><div class="pricing-card"><i class="fas fa-seedling"></i><h3>Starter</h3><div class="price">$29<span>/mo</span></div><p class="desc">Perfect for individuals and small projects getting started with LLM applications</p><ul class="list-unstyled"><li><i class="fas fa-check"></i>5 LLM Applications</li><li><i class="fas fa-check"></i>10K API Calls/month</li><li><i class="fas fa-check"></i>Basic Templates</li><li><i class="fas fa-check"></i>Community Support</li></ul><a href="#contact" class="btn-theme btn-theme-sm btn-default-bg text-uppercase">Start Free Trial</a></div></div>
+                <div class="col-sm-4 sm-margin-b-30"><div class="pricing-card featured"><div class="pricing-badge">Most Popular</div><i class="fas fa-briefcase"></i><h3>Professional</h3><div class="price">$99<span>/mo</span></div><p class="desc">Ideal for growing businesses and development teams building production apps</p><ul class="list-unstyled"><li><i class="fas fa-check"></i>Unlimited Applications</li><li><i class="fas fa-check"></i>100K API Calls/month</li><li><i class="fas fa-check"></i>Custom Model Training</li><li><i class="fas fa-check"></i>Priority Support</li></ul><a href="#contact" class="btn-theme btn-theme-sm btn-default-bg text-uppercase">Get Started</a></div></div>
+                <div class="col-sm-4 sm-margin-b-30"><div class="pricing-card"><i class="fas fa-building"></i><h3>Enterprise</h3><div class="price">Custom</div><p class="desc">Scalable solutions for large organizations with advanced security and compliance needs</p><ul class="list-unstyled"><li><i class="fas fa-check"></i>Unlimited Everything</li><li><i class="fas fa-check"></i>Dedicated Infrastructure</li><li><i class="fas fa-check"></i>Advanced Security</li><li><i class="fas fa-check"></i>24/7 Support</li></ul><a href="#contact" class="btn-theme btn-theme-sm btn-default-bg text-uppercase">Contact Sales</a></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="services">
+    <div class="bg-color-sky-light" data-auto-height="true">
+        <div class="content-lg container">
+            <div class="row margin-b-40"><div class="col-sm-8 col-sm-offset-2 text-center section-heading"><h2>Our Solutions</h2><p>Comprehensive LLM development solutions designed to accelerate your AI journey from concept to production deployment.</p></div></div>
+            <div class="row row-space-1 margin-b-2">
+                <div class="col-sm-4 sm-margin-b-2"><div class="solution-card" data-height="height"><i class="fas fa-comments"></i><h3>Chatbot Builder</h3><p>Create intelligent conversational AI with natural language understanding and context awareness</p></div></div>
+                <div class="col-sm-4 sm-margin-b-2"><div class="solution-card" data-height="height"><i class="fas fa-file-alt"></i><h3>Document Analysis</h3><p>Extract insights from documents with advanced text processing and summarization capabilities</p></div></div>
+                <div class="col-sm-4"><div class="solution-card" data-height="height"><i class="fas fa-pen-fancy"></i><h3>Content Generation</h3><p>Generate high-quality content for marketing, documentation, and creative writing</p></div></div>
+            </div>
+            <div class="row row-space-1">
+                <div class="col-sm-4 sm-margin-b-2"><div class="solution-card" data-height="height"><i class="fas fa-database"></i><h3>Knowledge Base</h3><p>Build intelligent knowledge bases that understand and answer complex queries</p></div></div>
+                <div class="col-sm-4 sm-margin-b-2"><div class="solution-card" data-height="height"><i class="fas fa-terminal"></i><h3>Code Assistant</h3><p>AI-powered coding assistance for faster development and code optimization</p></div></div>
+                <div class="col-sm-4"><div class="solution-card" data-height="height"><i class="fas fa-chart-line"></i><h3>Data Analytics</h3><p>Transform raw data into actionable insights with natural language queries</p></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="showcase" class="showcase-section">
+    <div class="container">
+        <div class="row margin-b-40"><div class="col-sm-8 col-sm-offset-2 text-center"><h2>Built with KnowledgeDB</h2><p>Discover powerful applications created using our low-code LLM platform</p></div></div>
+        <div class="row">
+            <div class="col-md-6 sm-margin-b-30">
+                <div class="showcase-app">
+                    <div class="showcase-browser-bar"><div class="showcase-dots"><span></span><span></span><span></span></div><div class="showcase-url-bar">🔒 chaosai.knowledgedb.dev</div></div>
+                    <div class="showcase-preview"><iframe src="https://chaosai.knowledgedb.dev" scrolling="no" loading="lazy"></iframe></div>
+                    <div class="showcase-info"><div class="app-header"><i class="fas fa-bolt" style="color:#e74c3c"></i><h4>ChaosAI</h4></div><p>AI-powered chaos engineering platform for intelligent system failure simulation and management.</p><a href="https://chaosai.knowledgedb.dev" target="_blank" class="btn-showcase">Visit ChaosAI <i class="fas fa-external-link-alt" style="margin-left:6px;font-size:11px"></i></a></div>
                 </div>
             </div>
-            
-            <div class="bg-color-sky-light">
-                <div class="content-lg container">
-                    <div class="row">
-                        <div class="col-md-5 col-sm-5 md-margin-b-60">
-                            <div class="margin-t-50 margin-b-30">
-                                <h2>Why KnowledgeDB?</h2>
-                                <p>We democratize AI development by making LLM application creation accessible to everyone. Whether you're a startup, enterprise, or individual developer, our platform provides the tools you need to build, deploy, and scale intelligent applications without the complexity.</p>
-                            </div>
-                            <a href="#contact" class="btn-theme btn-theme-sm btn-white-bg text-uppercase">Contact Us</a>
-                        </div>
-                        <div class="col-md-7 col-sm-7">
-                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                                <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 12px; margin-bottom: 20px; overflow: hidden; border: none;">
-                                    <div class="panel-heading" role="tab" id="headingOne" style="background: transparent; border: none; padding: 25px; border-bottom: none;">
-                                        <h3 class="panel-title" style="display: flex; align-items: center; margin: 0;">
-                                            <i class="fas fa-brain" style="font-size: 28px; margin-right: 20px; color: #e74c3c;"></i>
-                                            <a class="panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color: white; text-decoration: none; flex: 1; font-size: 18px; font-weight: 600;">
-                                                Pre-trained Models
-                                            </a>
-                                        </h3>
-                                    </div>
-                                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="border: none;">
-                                        <div class="panel-body" style="padding: 0 25px 25px; color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6; border: none;">
-                                            Access a comprehensive library of pre-trained language models including GPT, BERT, and custom domain-specific models ready for immediate use in your applications.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 12px; margin-bottom: 20px; overflow: hidden; border: none;">
-                                    <div class="panel-heading" role="tab" id="headingTwo" style="background: transparent; border: none; padding: 25px; border-bottom: none;">
-                                        <h3 class="panel-title" style="display: flex; align-items: center; margin: 0;">
-                                            <i class="fas fa-cogs" style="font-size: 28px; margin-right: 20px; color: #e74c3c;"></i>
-                                            <a class="collapsed panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="color: white; text-decoration: none; flex: 1; font-size: 18px; font-weight: 600;">
-                                                Custom Training
-                                            </a>
-                                        </h3>
-                                    </div>
-                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" style="border: none;">
-                                        <div class="panel-body" style="padding: 0 25px 25px; color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6; border: none;">
-                                            Fine-tune models with your own data to create specialized AI applications tailored to your specific use case and industry requirements.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 12px; margin-bottom: 20px; overflow: hidden; border: none;">
-                                    <div class="panel-heading" role="tab" id="headingThree" style="background: transparent; border: none; padding: 25px; border-bottom: none;">
-                                        <h3 class="panel-title" style="display: flex; align-items: center; margin: 0;">
-                                            <i class="fas fa-plug" style="font-size: 28px; margin-right: 20px; color: #e74c3c;"></i>
-                                            <a class="collapsed panel-title-child" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="color: white; text-decoration: none; flex: 1; font-size: 18px; font-weight: 600;">
-                                                API Integration
-                                            </a>
-                                        </h3>
-                                    </div>
-                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" style="border: none;">
-                                        <div class="panel-body" style="padding: 0 25px 25px; color: rgba(255,255,255,0.9); font-size: 16px; line-height: 1.6; border: none;">
-                                            Seamlessly integrate your LLM applications with existing systems through our robust REST APIs and SDKs for popular programming languages.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--// end row -->
+            <div class="col-md-6">
+                <div class="showcase-app">
+                    <div class="showcase-browser-bar"><div class="showcase-dots"><span></span><span></span><span></span></div><div class="showcase-url-bar">🔒 dochuman.knowledgedb.dev</div></div>
+                    <div class="showcase-preview"><iframe src="https://dochuman.knowledgedb.dev" scrolling="no" loading="lazy"></iframe></div>
+                    <div class="showcase-info"><div class="app-header"><i class="fas fa-file-alt" style="color:#3498db"></i><h4>DocHuman</h4></div><p>Revolutionary document processing platform for intelligent analysis and human-AI collaboration.</p><a href="https://dochuman.knowledgedb.dev" target="_blank" class="btn-showcase blue">Visit DocHuman <i class="fas fa-external-link-alt" style="margin-left:6px;font-size:11px"></i></a></div>
                 </div>
             </div>
         </div>
-        <!-- End About -->
+        <div class="row margin-t-60"><div class="col-sm-8 col-sm-offset-2 text-center"><div class="showcase-cta"><h3>Ready to Build Your Own?</h3><p>Join thousands of developers creating powerful LLM applications with our no-code platform</p><a href="#pricing" class="btn-cta">Start Building Today</a></div></div></div>
+    </div>
+</div>
+<div id="contact">
+    <div class="section-seperator">
+        <div class="content-lg container">
+            <div class="row"><div class="col-sm-8 col-sm-offset-2">
+                <div class="contact-box"><i class="fas fa-envelope"></i><h3>Get in Touch</h3><p>Ready to transform your business with AI? Contact us to discuss your LLM application needs and explore custom solutions.</p><div class="contact-email-box"><a href="mailto:director@entropyresearch.ai">director@entropyresearch.ai</a></div><p style="font-size:14px">We typically respond within 24 hours</p></div>
+            </div></div>
+        </div>
+    </div>
+    <div class="map height-300" style="position:relative">
+        <div class="map-label"><i class="fas fa-map-marker-alt"></i><strong>Dublin, Ireland</strong></div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9528.516234567891!2d-6.2603097!3d53.3498053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e99a9c0b2e7%3A0x9c9c0b2e7a9c0b2e!2sDublin+City+Centre%2C+Dublin%2C+Ireland!5e0!3m2!1sen!2sie!4v1640995200000" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+    </div>
+</div>
 
-
-
-        <!-- Pricing -->
-        <div id="pricing">
-            <div class="bg-color-sky-light">
-                <div class="content-lg container">
-                    <div class="row">
-                        <div class="col-sm-4 sm-margin-b-30">
-                            <div style="text-align: center; padding: 50px 30px; background: white; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; border: 2px solid transparent;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.1)';">
-                                <i class="fas fa-seedling" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                <h3 style="font-size: 24px; margin-bottom: 10px; color: #2c3e50;">Starter</h3>
-                                <div style="font-size: 36px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">$29<span style="font-size: 16px; color: #7f8c8d;">/mo</span></div>
-                                <p style="color: #7f8c8d; margin-bottom: 30px; font-size: 15px;">Perfect for individuals and small projects getting started with LLM applications</p>
-                                <ul class="list-unstyled" style="margin-bottom: 40px; text-align: left;">
-                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>5 LLM Applications</li>
-                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>10K API Calls/month</li>
-                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Basic Templates</li>
-                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Community Support</li>
-                                </ul>
-                                <a href="#contact" class="btn-theme btn-theme-sm btn-default-bg text-uppercase" style="width: 100%; padding: 15px; font-weight: 600;">Start Free Trial</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 sm-margin-b-30">
-                            <div style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); border-radius: 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; border: 3px solid #e74c3c; transform: scale(1.05);" onmouseover="this.style.transform='translateY(-10px) scale(1.05)'; this.style.boxShadow='0 30px 60px rgba(0,0,0,0.25)';" onmouseout="this.style.transform='translateY(0) scale(1.05)'; this.style.boxShadow='0 20px 50px rgba(0,0,0,0.2)';">
-                                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: #e74c3c; color: white; padding: 8px 20px; border-radius: 20px; font-size: 12px; font-weight: 600; text-transform: uppercase;">Most Popular</div>
-                                <i class="fas fa-briefcase" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                <h3 style="font-size: 24px; margin-bottom: 10px; color: white;">Professional</h3>
-                                <div style="font-size: 36px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">$99<span style="font-size: 16px; color: rgba(255,255,255,0.7);">/mo</span></div>
-                                <p style="color: rgba(255,255,255,0.8); margin-bottom: 30px; font-size: 15px;">Ideal for growing businesses and development teams building production apps</p>
-                                <ul class="list-unstyled" style="margin-bottom: 40px; text-align: left;">
-                                    <li style="margin-bottom: 12px; color: white; display: flex; align-items: center;"><i class="fas fa-check" style="color: #e74c3c; margin-right: 10px; font-size: 14px;"></i>Unlimited Applications</li>
-                                    <li style="margin-bottom: 12px; color: white; display: flex; align-items: center;"><i class="fas fa-check" style="color: #e74c3c; margin-right: 10px; font-size: 14px;"></i>100K API Calls/month</li>
-                                    <li style="margin-bottom: 12px; color: white; display: flex; align-items: center;"><i class="fas fa-check" style="color: #e74c3c; margin-right: 10px; font-size: 14px;"></i>Custom Model Training</li>
-                                    <li style="margin-bottom: 12px; color: white; display: flex; align-items: center;"><i class="fas fa-check" style="color: #e74c3c; margin-right: 10px; font-size: 14px;"></i>Priority Support</li>
-                                </ul>
-                                <a href="#contact" class="btn-theme btn-theme-sm btn-white-brd text-uppercase" style="width: 100%; padding: 15px; font-weight: 600;">Get Started</a>
-                            </div>
-                        </div>
-                        <div class="col-sm-4 sm-margin-b-30">
-                            <div style="text-align: center; padding: 50px 30px; background: white; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; border: 2px solid transparent;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 40px rgba(0,0,0,0.1)';">
-                                <i class="fas fa-building" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                <h3 style="font-size: 24px; margin-bottom: 10px; color: #2c3e50;">Enterprise</h3>
-                                <div style="font-size: 36px; font-weight: 700; color: #e74c3c; margin-bottom: 15px;">Custom</div>
-                                <p style="color: #7f8c8d; margin-bottom: 30px; font-size: 15px;">Scalable solutions for large organizations with advanced security and compliance needs</p>
-                                <ul class="list-unstyled" style="margin-bottom: 40px; text-align: left;">
-                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Unlimited Everything</li>
-                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Dedicated Infrastructure</li>
-                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>Advanced Security</li>
-                                    <li style="margin-bottom: 12px; color: #2c3e50; display: flex; align-items: center;"><i class="fas fa-check" style="color: #27ae60; margin-right: 10px; font-size: 14px;"></i>24/7 Support</li>
-                                </ul>
-                                <a href="#contact" class="btn-theme btn-theme-sm btn-default-bg text-uppercase" style="width: 100%; padding: 15px; font-weight: 600;">Contact Sales</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--// end row -->
-                </div>
+<footer class="footer">
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 sm-margin-b-30"><h4>Navigation</h4><a href="#body" class="footer-link">Home</a><a href="#about" class="footer-link">Features</a><a href="#services" class="footer-link">Solutions</a><a href="#contact" class="footer-link">Contact</a></div>
+                <div class="col-sm-3 sm-margin-b-30"><h4>Resources</h4><a href="#pricing" class="footer-link">Pricing</a><a href="api/index.html" target="_blank" class="footer-link">Documentation</a><a href="api/index.html" target="_blank" class="footer-link">API Reference</a><a href="#" class="footer-link">Tutorials</a></div>
+                <div class="col-sm-3 sm-margin-b-30"><h4>Legal</h4><a href="#" class="footer-link">Privacy Policy</a><a href="#" class="footer-link">Terms of Service</a><a href="#" class="footer-link">Security</a><a href="#" class="footer-link">Status</a></div>
+                <div class="col-sm-3"><h4>Connect</h4><div style="margin-bottom:16px"><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a><a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a><a href="#" class="social-icon"><i class="fab fa-github"></i></a></div><p class="footer-tagline">Building the future of AI-powered applications, one solution at a time.</p></div>
             </div>
         </div>
-        <!-- End Pricing -->
-
-
-
-        <!-- Services -->
-        <div id="services">
-            <div class="bg-color-sky-light" data-auto-height="true">
-                <div class="content-lg container">
-                    <div class="row margin-b-40">
-                        <div class="col-sm-8 col-sm-offset-2 text-center">
-                            <h2>Our Solutions</h2>
-                            <p>Comprehensive LLM development solutions designed to accelerate your AI journey from concept to production deployment.</p>
-                        </div>
-                    </div>
-                    <!--// end row -->
-
-                    <div class="row row-space-1 margin-b-2">
-                        <div class="col-sm-4 sm-margin-b-2">
-                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
-                                <div class="service-element">
-                                    <i class="fas fa-comments" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                </div>
-                                <div class="service-info">
-                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Chatbot Builder</h3>
-                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Create intelligent conversational AI with natural language understanding and context awareness</p>
-                                </div>
-                                <a href="#" class="content-wrapper-link"></a>    
-                            </div>
-                        </div>
-                        <div class="col-sm-4 sm-margin-b-2">
-                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
-                                <div class="service-element">
-                                    <i class="fas fa-file-alt" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                </div>
-                                <div class="service-info">
-                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Document Analysis</h3>
-                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Extract insights from documents with advanced text processing and summarization capabilities</p>
-                                </div>
-                                <a href="#" class="content-wrapper-link"></a>    
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
-                                <div class="service-element">
-                                    <i class="fas fa-pen-fancy" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                </div>
-                                <div class="service-info">
-                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Content Generation</h3>
-                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Generate high-quality content for marketing, documentation, and creative writing</p>
-                                </div>
-                                <a href="#" class="content-wrapper-link"></a>    
-                            </div>
-                        </div>
-                    </div>
-                    <!--// end row -->
-
-                    <div class="row row-space-1">
-                        <div class="col-sm-4 sm-margin-b-2">
-                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
-                                <div class="service-element">
-                                    <i class="fas fa-database" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                </div>
-                                <div class="service-info">
-                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Knowledge Base</h3>
-                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Build intelligent knowledge bases that understand and answer complex queries</p>
-                                </div>
-                                <a href="#" class="content-wrapper-link"></a>    
-                            </div>
-                        </div>
-                        <div class="col-sm-4 sm-margin-b-2">
-                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
-                                <div class="service-element">
-                                    <i class="fas fa-terminal" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                </div>
-                                <div class="service-info">
-                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Code Assistant</h3>
-                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">AI-powered coding assistance for faster development and code optimization</p>
-                                </div>
-                                <a href="#" class="content-wrapper-link"></a>    
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="service" data-height="height" style="text-align: center; padding: 50px 30px; background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%); border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); transition: all 0.3s ease; border: 1px solid rgba(231,76,60,0.1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 25px 50px rgba(0,0,0,0.15)'; this.style.borderColor='rgba(231,76,60,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.08)'; this.style.borderColor='rgba(231,76,60,0.1)';">
-                                <div class="service-element">
-                                    <i class="fas fa-chart-line" style="font-size: 56px; margin-bottom: 25px; color: #e74c3c;"></i>
-                                </div>
-                                <div class="service-info">
-                                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Data Analytics</h3>
-                                    <p class="margin-b-5" style="color: #7f8c8d; line-height: 1.6;">Transform raw data into actionable insights with natural language queries</p>
-                                </div>
-                                <a href="#" class="content-wrapper-link"></a>    
-                            </div>
-                        </div>
-                    </div>
-                    <!--// end row -->
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-6" style="display:flex;align-items:center;height:60px;gap:10px">
+                    <svg viewBox="0 0 32 32" fill="none" style="width:30px;height:30px;flex-shrink:0"><defs><linearGradient id="fg1" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#e74c3c"/><stop offset="100%" stop-color="#ff6b6b"/></linearGradient><linearGradient id="fg2" x1="0" y1="32" x2="32" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2c3e50"/><stop offset="100%" stop-color="#e74c3c"/></linearGradient><linearGradient id="fg3" x1="16" y1="2" x2="16" y2="14" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#ff6b6b"/><stop offset="100%" stop-color="#e74c3c" stop-opacity="0.3"/></linearGradient></defs><ellipse cx="16" cy="18" rx="9" ry="3.2" stroke="url(#fg1)" stroke-width="1.6"/><path d="M7 18v7.5c0 1.77 4 3.2 9 3.2s9-1.43 9-3.2V18" stroke="url(#fg1)" stroke-width="1.6" stroke-linecap="round"/><ellipse cx="16" cy="25.5" rx="9" ry="3.2" stroke="url(#fg1)" stroke-width="1.6"/><path d="M7 21.8c0 1.77 4 3.2 9 3.2s9-1.43 9-3.2" stroke="url(#fg2)" stroke-width="1" stroke-linecap="round" opacity="0.45"/><path d="M16 14.8 L16 6" stroke="url(#fg3)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 11.5 L11 7.5" stroke="url(#fg3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="10" cy="6.8" r="1.5" fill="url(#fg1)" opacity="0.85"/><path d="M16 11.5 L21 7.5" stroke="url(#fg3)" stroke-width="1.2" stroke-linecap="round"/><circle cx="22" cy="6.8" r="1.5" fill="url(#fg1)" opacity="0.85"/><circle cx="16" cy="4.5" r="2" fill="url(#fg1)"/><path d="M10 6.8 L6.5 4" stroke="url(#fg2)" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/><circle cx="5.8" cy="3.3" r="1" fill="url(#fg2)" opacity="0.55"/><path d="M22 6.8 L25.5 4" stroke="url(#fg2)" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/><circle cx="26.2" cy="3.3" r="1" fill="url(#fg2)" opacity="0.55"/><circle cx="12.5" cy="18" r="1" fill="#ff6b6b" opacity="0.7"/><circle cx="19.5" cy="18" r="1" fill="#e74c3c" opacity="0.7"/></svg>
+                    <h3>Knowledge<span>DB</span></h3>
                 </div>
+                <div class="col-xs-6 text-right" style="display:flex;align-items:center;justify-content:flex-end;height:60px"><p>&copy; 2026 Entropy AI Research Labs Pvt Ltd. All rights reserved.</p></div>
             </div>
         </div>
-        <!-- End Service -->
-
-        <!-- Showcase Apps -->
-        <div id="showcase" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); padding: 80px 0;">
-            <div class="container">
-                <div class="row margin-b-40">
-                    <div class="col-sm-8 col-sm-offset-2 text-center">
-                        <h2 style="color: white; margin-bottom: 20px;">Built with KnowledgeDB</h2>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 18px;">Discover powerful applications created using our no-code LLM platform</p>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md-6 sm-margin-b-30">
-                        <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 30px 60px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.2)';">
-                            <!-- Browser Header -->
-                            <div style="background: #f1f2f6; padding: 12px 20px; border-bottom: 1px solid #ddd; display: flex; align-items: center;">
-                                <div style="display: flex; gap: 8px; margin-right: 15px;">
-                                    <div style="width: 12px; height: 12px; background: #ff5f57; border-radius: 50%;"></div>
-                                    <div style="width: 12px; height: 12px; background: #ffbd2e; border-radius: 50%;"></div>
-                                    <div style="width: 12px; height: 12px; background: #28ca42; border-radius: 50%;"></div>
-                                </div>
-                                <div style="flex: 1; background: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; color: #666; border: 1px solid #ddd;">🔒 chaosai.knowledgedb.dev</div>
-                            </div>
-                            
-                            <!-- Live Website Preview -->
-                            <div style="height: 400px; position: relative; overflow: hidden;">
-                                <iframe src="https://chaosai.knowledgedb.dev" style="width: 120%; height: 120%; border: none; transform: scale(0.83); transform-origin: top left;" scrolling="no" loading="lazy"></iframe>
-                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 0%, transparent 95%, rgba(255,255,255,0.3) 100%); pointer-events: none;"></div>
-                            </div>
-                            
-                            <!-- App Info -->
-                            <div style="padding: 25px;">
-                                <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                    <i class="fas fa-bolt" style="font-size: 24px; color: #e74c3c; margin-right: 12px;"></i>
-                                    <h4 style="color: #2c3e50; margin: 0; font-size: 20px;">ChaosAI</h4>
-                                </div>
-                                <p style="color: #7f8c8d; line-height: 1.6; margin-bottom: 20px; font-size: 15px;">AI-powered chaos engineering platform for intelligent system failure simulation and management.</p>
-                                <a href="https://chaosai.knowledgedb.dev" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">Visit ChaosAI <i class="fas fa-external-link-alt" style="margin-left: 6px;"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 30px 60px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.2)';">
-                            <!-- Browser Header -->
-                            <div style="background: #f1f2f6; padding: 12px 20px; border-bottom: 1px solid #ddd; display: flex; align-items: center;">
-                                <div style="display: flex; gap: 8px; margin-right: 15px;">
-                                    <div style="width: 12px; height: 12px; background: #ff5f57; border-radius: 50%;"></div>
-                                    <div style="width: 12px; height: 12px; background: #ffbd2e; border-radius: 50%;"></div>
-                                    <div style="width: 12px; height: 12px; background: #28ca42; border-radius: 50%;"></div>
-                                </div>
-                                <div style="flex: 1; background: white; padding: 6px 12px; border-radius: 6px; font-size: 13px; color: #666; border: 1px solid #ddd;">🔒 dochuman.knowledgedb.dev</div>
-                            </div>
-                            
-                            <!-- Live Website Preview -->
-                            <div style="height: 400px; position: relative; overflow: hidden;">
-                                <iframe src="https://dochuman.knowledgedb.dev" style="width: 120%; height: 120%; border: none; transform: scale(0.83); transform-origin: top left;" scrolling="no" loading="lazy"></iframe>
-                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, transparent 0%, transparent 95%, rgba(255,255,255,0.3) 100%); pointer-events: none;"></div>
-                            </div>
-                            
-                            <!-- App Info -->
-                            <div style="padding: 25px;">
-                                <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                    <i class="fas fa-file-alt" style="font-size: 24px; color: #3498db; margin-right: 12px;"></i>
-                                    <h4 style="color: #2c3e50; margin: 0; font-size: 20px;">DocHuman</h4>
-                                </div>
-                                <p style="color: #7f8c8d; line-height: 1.6; margin-bottom: 20px; font-size: 15px;">Revolutionary document processing platform for intelligent analysis and human-AI collaboration.</p>
-                                <a href="https://dochuman.knowledgedb.dev" target="_blank" style="display: inline-block; background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">Visit DocHuman <i class="fas fa-external-link-alt" style="margin-left: 6px;"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Call to Action -->
-                <div class="row margin-t-60">
-                    <div class="col-sm-8 col-sm-offset-2 text-center">
-                        <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 40px; border: 2px solid rgba(255,255,255,0.2);">
-                            <h3 style="color: white; margin-bottom: 15px;">Ready to Build Your Own?</h3>
-                            <p style="color: rgba(255,255,255,0.8); margin-bottom: 25px; font-size: 16px;">Join thousands of developers creating powerful LLM applications with our no-code platform</p>
-                            <a href="#pricing" style="display: inline-block; background: #e74c3c; color: white; padding: 15px 30px; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;" onmouseover="this.style.background='#c0392b'; this.style.transform='scale(1.05)';" onmouseout="this.style.background='#e74c3c'; this.style.transform='scale(1)';">Start Building Today</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Showcase Apps -->
-            
-        <!-- Contact -->
-        <div id="contact">
-            <!-- Contact List -->
-            <div class="section-seperator">
-                <div class="content-lg container">
-                    <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2">
-                            <div style="text-align: center; padding: 50px 40px; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-                                <i class="fas fa-envelope" style="font-size: 48px; margin-bottom: 20px; color: #e74c3c;"></i>
-                                <h3>Get in Touch</h3>
-                                <p style="margin-bottom: 30px;">Ready to transform your business with AI? Contact us to discuss your LLM application needs and explore custom solutions.</p>
-                                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                                    <a href="mailto:director@entropyresearch.ai" style="color: #2c3e50; text-decoration: none; font-weight: 600;">director@entropyresearch.ai</a>
-                                </div>
-                                <p style="color: #7f8c8d; font-size: 14px;">We typically respond within 24 hours</p>
-                            </div>
-                        </div>
-                        <!-- End Contact List -->
-                    </div>
-                    <!--// end row -->
-                </div>
-            </div>
-            <!-- End Contact List -->
-            
-            <!-- Google Map -->
-            <div class="map height-300" style="position: relative;">
-                <div style="position: absolute; bottom: 20px; right: 20px; z-index: 2; background: rgba(44,62,80,0.9); padding: 15px; border-radius: 8px; color: white; pointer-events: none;">
-                    <i class="fas fa-map-marker-alt" style="font-size: 20px; margin-right: 8px; color: #e74c3c;"></i>
-                    <strong style="color: white; font-size: 14px;">Dublin, Ireland</strong>
-                </div>
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9528.516234567891!2d-6.2603097!3d53.3498053!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670e99a9c0b2e7%3A0x9c9c0b2e7a9c0b2e!2sDublin+City+Centre%2C+Dublin%2C+Ireland!5e0!3m2!1sen!2sie!4v1640995200000" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen></iframe>
-			</div>
-        </div>
-        <!-- End Contact -->
-        <!--========== END PAGE LAYOUT ==========-->
-
-        <!--========== FOOTER ==========-->
-        <footer class="footer">
-            <!-- Links -->
-            <div style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); padding: 60px 0;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-3 sm-margin-b-30">
-                            <h4 style="color: #e74c3c; margin-bottom: 25px; font-size: 18px;">Navigation</h4>
-                            <ul class="list-unstyled">
-                                <li style="margin-bottom: 12px;"><a href="#body" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Home</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#about" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Features</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#services" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Solutions</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#contact" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Contact</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-3 sm-margin-b-30">
-                            <h4 style="color: #e74c3c; margin-bottom: 25px; font-size: 18px;">Resources</h4>
-                            <ul class="list-unstyled">
-                                <li style="margin-bottom: 12px;"><a href="#pricing" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Pricing</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Documentation</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">API Reference</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Tutorials</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-3 sm-margin-b-30">
-                            <h4 style="color: #e74c3c; margin-bottom: 25px; font-size: 18px;">Legal</h4>
-                            <ul class="list-unstyled">
-                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Privacy Policy</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Terms of Service</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Security</a></li>
-                                <li style="margin-bottom: 12px;"><a href="#" style="color: rgba(255,255,255,0.8); transition: color 0.3s ease;" onmouseover="this.style.color='#e74c3c'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">Status</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-3">
-                            <h4 style="color: #e74c3c; margin-bottom: 25px; font-size: 18px;">Connect</h4>
-                            <div style="margin-bottom: 20px;">
-                                <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; text-align: center; line-height: 40px; margin-right: 10px; color: rgba(255,255,255,0.8); transition: all 0.3s ease;" onmouseover="this.style.background='#e74c3c'; this.style.color='white';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.color='rgba(255,255,255,0.8)';"><i class="fab fa-twitter"></i></a>
-                                <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; text-align: center; line-height: 40px; margin-right: 10px; color: rgba(255,255,255,0.8); transition: all 0.3s ease;" onmouseover="this.style.background='#e74c3c'; this.style.color='white';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.color='rgba(255,255,255,0.8)';"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" style="display: inline-block; width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; text-align: center; line-height: 40px; color: rgba(255,255,255,0.8); transition: all 0.3s ease;" onmouseover="this.style.background='#e74c3c'; this.style.color='white';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.color='rgba(255,255,255,0.8)';"><i class="fab fa-github"></i></a>
-                            </div>
-                            <p style="color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.6;">Building the future of AI-powered applications, one solution at a time.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Links -->
-
-            <!-- Copyright -->
-            <div style="background: #1a252f; padding: 25px 0;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-6" style="display: flex; align-items: center; height: 60px;">
-                            <h3 style="margin: 0; color: white; font-weight: 700; font-size: 24px; font-family: 'Orbitron', monospace;">Knowledge<span style="color: #e74c3c; font-size: 28px; font-weight: 900;">DB</span></h3>
-                        </div>
-                        <div class="col-xs-6 text-right" style="display: flex; align-items: center; justify-content: flex-end; height: 60px;">
-                            <p class="margin-b-0" style="color: rgba(255,255,255,0.7); font-size: 14px;">&copy; 2026 Entropy AI Research Labs Pvt Ltd. All rights reserved.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Copyright -->
-        </footer>
-        <!--========== END FOOTER ==========-->
-
-        <!-- Back To Top -->
-        <a href="javascript:void(0);" class="js-back-to-top back-to-top">Top</a>
-
-        <!-- JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
-        <!-- CORE PLUGINS -->
-        <script src="vendor/jquery.min.js" type="text/javascript"></script>
-        <script src="vendor/jquery-migrate.min.js" type="text/javascript"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-
-        <!-- PAGE LEVEL PLUGINS -->
-        <script src="vendor/jquery.easing.js" type="text/javascript"></script>
-        <script src="vendor/jquery.back-to-top.js" type="text/javascript"></script>
-        <script src="vendor/jquery.smooth-scroll.js" type="text/javascript"></script>
-        <script src="vendor/jquery.wow.min.js" type="text/javascript"></script>
-        <script src="vendor/swiper/js/swiper.jquery.min.js" type="text/javascript"></script>
-        <script src="vendor/masonry/jquery.masonry.pkgd.min.js" type="text/javascript"></script>
-        <script src="vendor/masonry/imagesloaded.pkgd.min.js" type="text/javascript"></script>
-
-        <!-- PAGE LEVEL SCRIPTS -->
-        <script src="js/layout.min.js" type="text/javascript"></script>
-        <script src="js/components/wow.min.js" type="text/javascript"></script>
-        <script src="js/components/swiper.min.js" type="text/javascript"></script>
-        <script src="js/components/masonry.min.js" type="text/javascript"></script>
-
-    </body>
-    <!-- END BODY -->
+    </div>
+</footer>
+<a href="javascript:void(0);" class="js-back-to-top back-to-top">Top</a>
+<script src="vendor/jquery.min.js" type="text/javascript"></script>
+<script src="vendor/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="vendor/jquery.easing.js" type="text/javascript"></script>
+<script src="vendor/jquery.back-to-top.js" type="text/javascript"></script>
+<script src="vendor/jquery.smooth-scroll.js" type="text/javascript"></script>
+<script src="vendor/jquery.wow.min.js" type="text/javascript"></script>
+<script src="vendor/swiper/js/swiper.jquery.min.js" type="text/javascript"></script>
+<script src="vendor/masonry/jquery.masonry.pkgd.min.js" type="text/javascript"></script>
+<script src="vendor/masonry/imagesloaded.pkgd.min.js" type="text/javascript"></script>
+<script src="js/layout.min.js" type="text/javascript"></script>
+<script src="js/components/wow.min.js" type="text/javascript"></script>
+<script src="js/components/swiper.min.js" type="text/javascript"></script>
+<script src="js/components/masonry.min.js" type="text/javascript"></script>
+<script>
+function getTheme(){return localStorage.getItem('kdb_theme')||'dark'}
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);var s=document.getElementById('theme-icon-sun'),m=document.getElementById('theme-icon-moon');if(s&&m){s.style.display=t==='light'?'block':'none';m.style.display=t==='dark'?'block':'none'}}
+function toggleTheme(){var c=getTheme(),n=c==='dark'?'light':'dark';localStorage.setItem('kdb_theme',n);applyTheme(n)}
+applyTheme(getTheme());
+</script>
+</body>
 </html>

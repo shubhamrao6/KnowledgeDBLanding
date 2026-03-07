@@ -1,0 +1,482 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket Chat - KnowledgeDB API</title>
+  <meta name="description" content="KnowledgeDB API WebSocket chat — real-time streaming chat powered by Claude with conversation history and model selection.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    .ws-tester {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 30px 0;
+    }
+    .ws-tester-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ws-tester-header h3 { font-size: 15px; font-weight: 700; }
+    .ws-status {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: auto;
+    }
+    .ws-status.disconnected { background: rgba(231,76,60,0.15); color: var(--red); }
+    .ws-status.connected { background: rgba(46,204,113,0.15); color: var(--green); }
+    .ws-status.connecting { background: rgba(243,156,18,0.15); color: var(--orange); }
+    .ws-connect-bar {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: end;
+    }
+    .ws-connect-bar .test-field { flex: 1; margin: 0; }
+    .ws-connect-bar .test-field label { margin-bottom: 4px; }
+    .ws-connect-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+    .ws-connect-btn.connect {
+      background: linear-gradient(135deg, var(--green), #27ae60);
+      color: white;
+    }
+    .ws-connect-btn.disconnect {
+      background: linear-gradient(135deg, var(--red), var(--red-dark));
+      color: white;
+    }
+    .ws-messages {
+      height: 350px;
+      overflow-y: auto;
+      padding: 16px 20px;
+      background: var(--bg-code);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      line-height: 1.7;
+    }
+    .ws-msg { margin-bottom: 8px; padding: 8px 12px; border-radius: 8px; }
+    .ws-msg.system { color: var(--text-muted); font-style: italic; }
+    .ws-msg.sent { background: rgba(52,152,219,0.1); border-left: 3px solid var(--blue); }
+    .ws-msg.received { background: rgba(46,204,113,0.1); border-left: 3px solid var(--green); }
+    .ws-msg.error { background: rgba(231,76,60,0.1); border-left: 3px solid var(--red); color: var(--red-light); }
+    .ws-msg .msg-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+    .ws-msg.sent .msg-label { color: var(--blue); }
+    .ws-msg.received .msg-label { color: var(--green); }
+    .ws-input-bar {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+    }
+    .ws-input-bar input {
+      flex: 1;
+      padding: 10px 14px;
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      outline: none;
+    }
+    .ws-input-bar input:focus { border-color: var(--red); }
+    .ws-input-bar select {
+      padding: 10px 14px;
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 12px;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-header"></div>
+    <div id="sidebar-nav" class="sidebar-nav"></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="top-bar" data-title="WebSocket Chat"></div>
+
+    <div class="page-hero">
+      <h1>WebSocket Chat</h1>
+      <p>Real-time streaming chat powered by Claude. Connect via WebSocket, send messages, and receive streamed AI responses with conversation history support.</p>
+    </div>
+
+    <div class="content-area">
+
+      <div class="base-url-box">
+        <span class="label">WebSocket URL</span>
+        <code>wss://p417pa2mu2.execute-api.us-east-1.amazonaws.com/prod?token=&lt;idToken&gt;</code>
+      </div>
+
+      <div class="info-box note">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <div>Authentication is done via the <code>token</code> query parameter when connecting. Use the <code>idToken</code> from the login response. The WebSocket authorizer validates the token and extracts the user ID.</div>
+      </div>
+
+      <!-- Connection Flow -->
+      <div class="endpoint-block">
+        <div class="endpoint-header">
+          <h2>Connection Flow</h2>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>The WebSocket API uses a simple message-based protocol. After connecting, send JSON messages and receive streamed responses.</p>
+
+            <div class="params-title">Message Actions</div>
+            <table class="params-table">
+              <thead><tr><th>Action</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>sendMessage</td><td>Send a chat message and receive a streamed AI response.</td></tr>
+                <tr><td>load_history</td><td>Load paginated conversation history.</td></tr>
+                <tr><td>clear_conversation</td><td>Delete all conversation history for the user.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">sendMessage Parameters</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>action</td><td>string <span class="param-required">required</span></td><td>Must be <code>"sendMessage"</code>.</td></tr>
+                <tr><td>question</td><td>string <span class="param-required">required</span></td><td>The message/question to send.</td></tr>
+                <tr><td>model_id</td><td>string <span class="param-optional">optional</span></td><td><code>"basic"</code> (Claude Haiku 4.5) or <code>"premium"</code> (Claude Sonnet 4). Default: <code>"basic"</code>.</td></tr>
+                <tr><td>system_prompt</td><td>string <span class="param-optional">optional</span></td><td>Custom system prompt for the AI.</td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">Response Events (streamed)</div>
+            <table class="params-table">
+              <thead><tr><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>start</td><td>Processing has begun. <code>{ "type": "start", "message": "Processing..." }</code></td></tr>
+                <tr><td>chunk</td><td>A text chunk of the response. <code>{ "type": "chunk", "text": "..." }</code></td></tr>
+                <tr><td>end</td><td>Response complete. <code>{ "type": "end", "message": "Response complete" }</code></td></tr>
+              </tbody>
+            </table>
+
+            <div class="params-title">load_history Parameters</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>action</td><td>string</td><td>Must be <code>"load_history"</code>.</td></tr>
+                <tr><td>start</td><td>number <span class="param-optional">optional</span></td><td>Offset start. Default: <code>0</code>.</td></tr>
+                <tr><td>end</td><td>number <span class="param-optional">optional</span></td><td>Offset end. Default: <code>10</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="ws-send">sendMessage</button>
+              <button class="code-tab" data-target="ws-history">load_history</button>
+              <button class="code-tab" data-target="ws-clear">clear</button>
+              <button class="code-tab" data-target="ws-events">Events</button>
+            </div>
+            <div class="code-panel active" id="ws-send">
+<pre><span class="comment">// Send a chat message</span>
+{
+  <span class="key">"action"</span>: <span class="string">"sendMessage"</span>,
+  <span class="key">"question"</span>: <span class="string">"Explain quantum computing"</span>,
+  <span class="key">"model_id"</span>: <span class="string">"basic"</span>,
+  <span class="key">"system_prompt"</span>: <span class="string">"You are a helpful assistant"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="ws-history">
+<pre><span class="comment">// Load conversation history</span>
+{
+  <span class="key">"action"</span>: <span class="string">"load_history"</span>,
+  <span class="key">"start"</span>: <span class="number">0</span>,
+  <span class="key">"end"</span>: <span class="number">20</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="ws-clear">
+<pre><span class="comment">// Clear all conversation history</span>
+{
+  <span class="key">"action"</span>: <span class="string">"clear_conversation"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="ws-events">
+<pre><span class="comment">// Stream events received:</span>
+
+<span class="comment">// 1. Processing started</span>
+{ <span class="key">"type"</span>: <span class="string">"start"</span>, <span class="key">"message"</span>: <span class="string">"Processing your request..."</span> }
+
+<span class="comment">// 2. Text chunks (multiple)</span>
+{ <span class="key">"type"</span>: <span class="string">"chunk"</span>, <span class="key">"text"</span>: <span class="string">"Quantum computing is"</span> }
+{ <span class="key">"type"</span>: <span class="string">"chunk"</span>, <span class="key">"text"</span>: <span class="string">" a type of computation"</span> }
+
+<span class="comment">// 3. Response complete</span>
+{ <span class="key">"type"</span>: <span class="string">"end"</span>, <span class="key">"message"</span>: <span class="string">"Response complete"</span> }</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live WebSocket Tester -->
+      <div class="ws-tester">
+        <div class="ws-tester-header">
+          <span class="ws-tester-icon"><svg viewBox="0 0 24 24" width="20" height="20" stroke="var(--red)" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+          <h3>Live WebSocket Tester</h3>
+          <span class="ws-status disconnected" id="ws-status-badge">Disconnected</span>
+        </div>
+        <div class="ws-connect-bar">
+          <div class="test-field">
+            <label>ID Token</label>
+            <input type="text" id="ws-token" placeholder="Paste your idToken here (or login on the Auth page first)">
+          </div>
+          <button class="ws-connect-btn connect" id="ws-connect-btn" onclick="toggleWsConnection()">Connect</button>
+        </div>
+        <div class="ws-messages" id="ws-messages">
+          <div class="ws-msg system">Connect to start chatting. Login on the Auth page first to get your token.</div>
+        </div>
+        <div class="ws-input-bar">
+          <input type="text" id="ws-input" placeholder="Type a message..." disabled onkeydown="if(event.key==='Enter')sendWsMessage()">
+          <select id="ws-model" disabled>
+            <option value="basic">Haiku 4.5</option>
+            <option value="premium">Sonnet 4</option>
+          </select>
+          <button class="test-send" id="ws-send-btn" onclick="sendWsMessage()" disabled>Send</button>
+        </div>
+      </div>
+
+      <!-- JavaScript Example -->
+      <div class="endpoint-block">
+        <div class="endpoint-header">
+          <h2>JavaScript Example</h2>
+        </div>
+        <div class="endpoint-body" style="grid-template-columns:1fr">
+          <div class="endpoint-code" style="border-right:none">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="js-example">JavaScript</button>
+              <button class="code-tab" data-target="py-example">Python</button>
+            </div>
+            <div class="code-panel active" id="js-example">
+<pre><span class="comment">// Connect to WebSocket</span>
+<span class="key">const</span> token = <span class="string">'your-id-token'</span>;
+<span class="key">const</span> ws = <span class="key">new</span> WebSocket(
+  <span class="string">`wss://p417pa2mu2.execute-api.us-east-1.amazonaws.com/prod?token=${token}`</span>
+);
+
+ws.onopen = () => {
+  console.log(<span class="string">'Connected'</span>);
+
+  <span class="comment">// Send a message</span>
+  ws.send(JSON.stringify({
+    action: <span class="string">'sendMessage'</span>,
+    question: <span class="string">'What is machine learning?'</span>,
+    model_id: <span class="string">'basic'</span>
+  }));
+};
+
+ws.onmessage = (event) => {
+  <span class="key">const</span> data = JSON.parse(event.data);
+
+  <span class="key">if</span> (data.type === <span class="string">'chunk'</span>) {
+    process.stdout.write(data.text); <span class="comment">// Stream text</span>
+  } <span class="key">else if</span> (data.type === <span class="string">'end'</span>) {
+    console.log(<span class="string">'\nDone!'</span>);
+  }
+};</pre>
+            </div>
+            <div class="code-panel" id="py-example">
+<pre><span class="key">import</span> websocket
+<span class="key">import</span> json
+
+token = <span class="string">"your-id-token"</span>
+url = <span class="string">f"wss://p417pa2mu2.execute-api.us-east-1.amazonaws.com/prod?token={token}"</span>
+
+ws = websocket.create_connection(url)
+
+<span class="comment"># Send a message</span>
+ws.send(json.dumps({
+    <span class="string">"action"</span>: <span class="string">"sendMessage"</span>,
+    <span class="string">"question"</span>: <span class="string">"What is machine learning?"</span>,
+    <span class="string">"model_id"</span>: <span class="string">"basic"</span>
+}))
+
+<span class="comment"># Receive streamed response</span>
+<span class="key">while</span> <span class="boolean">True</span>:
+    result = json.loads(ws.recv())
+    <span class="key">if</span> result[<span class="string">"type"</span>] == <span class="string">"chunk"</span>:
+        print(result[<span class="string">"text"</span>], end=<span class="string">""</span>)
+    <span class="key">elif</span> result[<span class="string">"type"</span>] == <span class="string">"end"</span>:
+        print(<span class="string">"\nDone!"</span>)
+        <span class="key">break</span>
+
+ws.close()</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+<script src="icons.js"></script>
+<script src="app.js"></script>
+<script>
+let ws = null;
+let currentResponse = '';
+
+function toggleWsConnection() {
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.close();
+  } else {
+    connectWs();
+  }
+}
+
+function connectWs() {
+  let token = document.getElementById('ws-token').value || getToken();
+  if (!token) {
+    addWsMessage('error', 'No token provided. Login on the Auth page or paste a token.');
+    return;
+  }
+
+  setWsStatus('connecting');
+  const url = `wss://p417pa2mu2.execute-api.us-east-1.amazonaws.com/prod?token=${token}`;
+
+  try {
+    ws = new WebSocket(url);
+  } catch(e) {
+    addWsMessage('error', `Connection failed: ${e.message}`);
+    setWsStatus('disconnected');
+    return;
+  }
+
+  ws.onopen = () => {
+    setWsStatus('connected');
+    addWsMessage('system', 'Connected to WebSocket. You can now send messages.');
+    document.getElementById('ws-input').disabled = false;
+    document.getElementById('ws-model').disabled = false;
+    document.getElementById('ws-send-btn').disabled = false;
+  };
+
+  ws.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      if (data.type === 'start') {
+        currentResponse = '';
+        addWsMessage('system', 'AI is thinking...');
+      } else if (data.type === 'chunk') {
+        currentResponse += data.text;
+        updateLastMessage(currentResponse);
+      } else if (data.type === 'end') {
+        if (currentResponse) {
+          replaceLastMessage('received', currentResponse);
+        }
+        currentResponse = '';
+      } else if (data.type === 'history') {
+        addWsMessage('system', `Loaded ${data.messages.length} messages (total: ${data.total_count})`);
+      } else if (data.type === 'clear_complete') {
+        addWsMessage('system', 'Conversation history cleared.');
+      } else if (data.error) {
+        addWsMessage('error', data.error);
+      } else {
+        addWsMessage('received', JSON.stringify(data, null, 2));
+      }
+    } catch(e) {
+      addWsMessage('received', event.data);
+    }
+  };
+
+  ws.onclose = () => {
+    setWsStatus('disconnected');
+    addWsMessage('system', 'Disconnected.');
+    document.getElementById('ws-input').disabled = true;
+    document.getElementById('ws-model').disabled = true;
+    document.getElementById('ws-send-btn').disabled = true;
+  };
+
+  ws.onerror = () => {
+    addWsMessage('error', 'WebSocket error. Check your token and try again.');
+    setWsStatus('disconnected');
+  };
+}
+
+function sendWsMessage() {
+  const input = document.getElementById('ws-input');
+  const model = document.getElementById('ws-model').value;
+  const text = input.value.trim();
+  if (!text || !ws || ws.readyState !== WebSocket.OPEN) return;
+
+  const msg = { action: 'sendMessage', question: text, model_id: model };
+  ws.send(JSON.stringify(msg));
+  addWsMessage('sent', text);
+  input.value = '';
+}
+
+function setWsStatus(status) {
+  const badge = document.getElementById('ws-status-badge');
+  const btn = document.getElementById('ws-connect-btn');
+  badge.className = `ws-status ${status}`;
+  badge.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+  if (status === 'connected') {
+    btn.textContent = 'Disconnect';
+    btn.className = 'ws-connect-btn disconnect';
+  } else {
+    btn.textContent = 'Connect';
+    btn.className = 'ws-connect-btn connect';
+  }
+}
+
+function addWsMessage(type, text) {
+  const container = document.getElementById('ws-messages');
+  const div = document.createElement('div');
+  div.className = `ws-msg ${type}`;
+  const label = type === 'sent' ? 'You' : type === 'received' ? 'AI' : type === 'error' ? 'Error' : 'System';
+  div.innerHTML = `<div class="msg-label">${label}</div><div class="msg-text">${escapeHtml(text)}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function updateLastMessage(text) {
+  const container = document.getElementById('ws-messages');
+  const msgs = container.querySelectorAll('.ws-msg.system');
+  const last = msgs[msgs.length - 1];
+  if (last) {
+    last.className = 'ws-msg received';
+    last.innerHTML = `<div class="msg-label">AI</div><div class="msg-text">${escapeHtml(text)}</div>`;
+    container.scrollTop = container.scrollHeight;
+  }
+}
+
+function replaceLastMessage(type, text) {
+  const container = document.getElementById('ws-messages');
+  const msgs = container.querySelectorAll('.ws-msg.received');
+  const last = msgs[msgs.length - 1];
+  if (last) {
+    last.innerHTML = `<div class="msg-label">AI</div><div class="msg-text">${escapeHtml(text)}</div>`;
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Auto-fill token from localStorage
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = getToken();
+  if (saved) document.getElementById('ws-token').value = saved;
+});
+</script>
+</body>
+</html>
