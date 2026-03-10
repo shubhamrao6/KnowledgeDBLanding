@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription - KnowledgeDB API</title>
+  <meta name="description" content="KnowledgeDB API subscription — manage billing, checkout, plan changes, cancellations, usage tracking, and customer portal.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+<div class="layout">
+  <nav class="sidebar">
+    <div class="sidebar-header"></div>
+    <div id="sidebar-nav" class="sidebar-nav"></div>
+  </nav>
+
+  <main class="main-content">
+    <div class="top-bar" data-title="Subscription"></div>
+
+    <div class="page-hero">
+      <h1>Subscription</h1>
+      <p>Manage billing and subscription lifecycle. Create checkout sessions, change plans, track usage, and handle cancellations. Powered by Polar for payment processing.</p>
+    </div>
+
+    <div class="content-area">
+      <div class="auth-banner">
+        <span class="icon"><svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
+        <div class="text">All subscription endpoints (except the webhook) require authentication. Include <code>Authorization: Bearer &lt;idToken&gt;</code> in your request headers.</div>
+      </div>
+
+      <!-- GET SUBSCRIPTION -->
+      <div class="endpoint-block" id="get-subscription">
+        <div class="endpoint-header">
+          <span class="method-badge get">GET</span>
+          <h2>Get Subscription</h2>
+          <code class="endpoint-url">/subscription</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Retrieve the current subscription status for the authenticated user, including plan details, billing period, and API key.</p>
+            <div class="params-title">Response Fields (200)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>subscription</td><td>object</td><td>Subscription details object.</td></tr>
+                <tr><td>subscription.plan</td><td>string</td><td>Current plan: <code>free</code>, <code>starter</code>, <code>professional</code>, or <code>enterprise</code>.</td></tr>
+                <tr><td>subscription.status</td><td>string</td><td>Subscription status: <code>active</code>, <code>canceled</code>, <code>past_due</code>, or <code>trialing</code>.</td></tr>
+                <tr><td>subscription.apiKey</td><td>string</td><td>API key for <code>x-api-key</code> header.</td></tr>
+                <tr><td>subscription.currentPeriodStart</td><td>string</td><td>ISO 8601 start of current billing period.</td></tr>
+                <tr><td>subscription.currentPeriodEnd</td><td>string</td><td>ISO 8601 end of current billing period.</td></tr>
+                <tr><td>subscription.createdAt</td><td>string</td><td>ISO 8601 subscription creation timestamp.</td></tr>
+                <tr><td>subscription.updatedAt</td><td>string</td><td>ISO 8601 last update timestamp.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="getsub-res">Response</button>
+              <button class="code-tab test-tab" data-target="getsub-test">Test</button>
+            </div>
+            <div class="code-panel active" id="getsub-res">
+<pre><span class="comment">// GET /subscription</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+
+<span class="comment">// 200 OK</span>
+{
+  <span class="key">"subscription"</span>: {
+    <span class="key">"plan"</span>: <span class="string">"starter"</span>,
+    <span class="key">"status"</span>: <span class="string">"active"</span>,
+    <span class="key">"apiKey"</span>: <span class="string">"IC01PUROzD70dFJtVhrVNm1AMC22kpW2..."</span>,
+    <span class="key">"currentPeriodStart"</span>: <span class="string">"2026-03-09T12:05:39.906948"</span>,
+    <span class="key">"currentPeriodEnd"</span>: <span class="string">"2026-04-08T12:05:39.906948"</span>,
+    <span class="key">"createdAt"</span>: <span class="string">"2026-03-09T12:05:39.906948"</span>,
+    <span class="key">"updatedAt"</span>: <span class="string">"2026-03-09T12:05:39.906948"</span>
+  }
+}</pre>
+            </div>
+            <div class="code-panel" id="getsub-test">
+              <div class="test-panel">
+                <button class="test-send" onclick="tryGetSubscription()">Send Request</button>
+                <div class="test-response" id="getsub-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHECKOUT -->
+      <div class="endpoint-block" id="checkout">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Create Checkout Session</h2>
+          <code class="endpoint-url">/subscription/checkout</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Create a Polar checkout session for subscribing to a plan. Returns a checkout URL that the user should be redirected to for payment.</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>plan</td><td>string <span class="param-required">required</span></td><td>Plan to subscribe to: <code>starter</code>, <code>professional</code>, or <code>enterprise</code>.</td></tr>
+                <tr><td>successUrl</td><td>string <span class="param-optional">optional</span></td><td>URL to redirect after successful payment.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response Fields (200)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>checkoutUrl</td><td>string</td><td>Polar checkout URL. Redirect the user here.</td></tr>
+                <tr><td>sessionId</td><td>string</td><td>Checkout session identifier.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="checkout-req">Request</button>
+              <button class="code-tab" data-target="checkout-res">Response</button>
+              <button class="code-tab test-tab" data-target="checkout-test">Test</button>
+            </div>
+            <div class="code-panel active" id="checkout-req">
+<pre><span class="comment">// POST /subscription/checkout</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"plan"</span>: <span class="string">"professional"</span>,
+  <span class="key">"successUrl"</span>: <span class="string">"https://knowledgedb.dev/success"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="checkout-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"checkoutUrl"</span>: <span class="string">"https://polar.sh/checkout/..."</span>,
+  <span class="key">"sessionId"</span>: <span class="string">"cs_a1b2c3d4e5f6"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="checkout-test">
+              <div class="test-panel">
+                <div class="test-field"><label>Plan</label><select id="checkout-plan"><option value="starter">Starter ($29/mo)</option><option value="professional" selected>Professional ($99/mo)</option><option value="enterprise">Enterprise (Custom)</option></select></div>
+                <button class="test-send" onclick="tryCheckout()">Send Request</button>
+                <div class="test-response" id="checkout-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHANGE PLAN -->
+      <div class="endpoint-block" id="change">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Change Plan</h2>
+          <code class="endpoint-url">/subscription/change</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Upgrade or downgrade the current subscription plan. Changes take effect immediately for upgrades, or at the end of the current billing period for downgrades.</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>newPlan</td><td>string <span class="param-required">required</span></td><td>Target plan: <code>starter</code>, <code>professional</code>, or <code>enterprise</code>.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response Fields (200)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>message</td><td>string</td><td>Confirmation of plan change.</td></tr>
+                <tr><td>previousPlan</td><td>string</td><td>The plan before the change.</td></tr>
+                <tr><td>newPlan</td><td>string</td><td>The new active plan.</td></tr>
+                <tr><td>effectiveDate</td><td>string</td><td>When the change takes effect.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="change-req">Request</button>
+              <button class="code-tab" data-target="change-res">Response</button>
+              <button class="code-tab test-tab" data-target="change-test">Test</button>
+            </div>
+            <div class="code-panel active" id="change-req">
+<pre><span class="comment">// POST /subscription/change</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"newPlan"</span>: <span class="string">"professional"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="change-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"message"</span>: <span class="string">"Plan changed successfully"</span>,
+  <span class="key">"previousPlan"</span>: <span class="string">"starter"</span>,
+  <span class="key">"newPlan"</span>: <span class="string">"professional"</span>,
+  <span class="key">"effectiveDate"</span>: <span class="string">"2026-03-09T12:00:00Z"</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="change-test">
+              <div class="test-panel">
+                <div class="test-field"><label>New Plan</label><select id="change-plan"><option value="starter">Starter</option><option value="professional">Professional</option><option value="enterprise">Enterprise</option></select></div>
+                <button class="test-send" onclick="tryChangePlan()">Send Request</button>
+                <div class="test-response" id="change-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CANCEL SUBSCRIPTION -->
+      <div class="endpoint-block" id="cancel">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Cancel Subscription</h2>
+          <code class="endpoint-url">/subscription/cancel</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Cancel the current subscription. By default, the subscription remains active until the end of the current billing period. Use <code>immediate: true</code> to cancel immediately.</p>
+            <div class="params-title">Request Body</div>
+            <table class="params-table">
+              <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>immediate</td><td>boolean <span class="param-optional">optional</span></td><td>If <code>true</code>, cancel immediately. Default: <code>false</code> (cancel at period end).</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response Fields (200)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>message</td><td>string</td><td>Cancellation confirmation.</td></tr>
+                <tr><td>cancelAt</td><td>string</td><td>ISO 8601 date when the subscription will end.</td></tr>
+                <tr><td>immediate</td><td>boolean</td><td>Whether the cancellation was immediate.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="cancel-req">Request</button>
+              <button class="code-tab" data-target="cancel-res">Response</button>
+              <button class="code-tab test-tab" data-target="cancel-test">Test</button>
+            </div>
+            <div class="code-panel active" id="cancel-req">
+<pre><span class="comment">// POST /subscription/cancel</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+{
+  <span class="key">"immediate"</span>: <span class="boolean">false</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="cancel-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"message"</span>: <span class="string">"Subscription cancelled"</span>,
+  <span class="key">"cancelAt"</span>: <span class="string">"2026-04-01T00:00:00Z"</span>,
+  <span class="key">"immediate"</span>: <span class="boolean">false</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="cancel-test">
+              <div class="test-panel">
+                <div class="test-field"><label>Immediate</label><select id="cancel-immediate"><option value="false" selected>No (end of period)</option><option value="true">Yes (immediate)</option></select></div>
+                <button class="test-send" onclick="tryCancelSubscription()">Send Request</button>
+                <div class="test-response" id="cancel-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- USAGE -->
+      <div class="endpoint-block" id="usage">
+        <div class="endpoint-header">
+          <span class="method-badge get">GET</span>
+          <h2>Get Usage</h2>
+          <code class="endpoint-url">/subscription/usage</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Retrieve usage statistics for the current billing period, including API call quotas, consumption, and rate limits.</p>
+            <div class="params-title">Response Fields (200)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>plan</td><td>string</td><td>Current subscription plan.</td></tr>
+                <tr><td>quota</td><td>number</td><td>Total API call quota for the period.</td></tr>
+                <tr><td>used</td><td>number</td><td>Number of API calls used.</td></tr>
+                <tr><td>remaining</td><td>number</td><td>Remaining API calls.</td></tr>
+                <tr><td>percentUsed</td><td>number</td><td>Percentage of quota consumed.</td></tr>
+                <tr><td>periodStart</td><td>string</td><td>Start date of the current billing period.</td></tr>
+                <tr><td>periodEnd</td><td>string</td><td>End date of the current billing period.</td></tr>
+                <tr><td>throttle</td><td>object</td><td>Rate limiting: <code>rateLimit</code> (requests/sec) and <code>burstLimit</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="usage-res">Response</button>
+              <button class="code-tab test-tab" data-target="usage-test">Test</button>
+            </div>
+            <div class="code-panel active" id="usage-res">
+<pre><span class="comment">// GET /subscription/usage</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+
+<span class="comment">// 200 OK</span>
+{
+  <span class="key">"plan"</span>: <span class="string">"starter"</span>,
+  <span class="key">"quota"</span>: <span class="number">10000</span>,
+  <span class="key">"used"</span>: <span class="number">0</span>,
+  <span class="key">"remaining"</span>: <span class="number">10000</span>,
+  <span class="key">"percentUsed"</span>: <span class="number">0</span>,
+  <span class="key">"periodStart"</span>: <span class="string">"2026-03-01"</span>,
+  <span class="key">"periodEnd"</span>: <span class="string">"2026-03-09"</span>,
+  <span class="key">"throttle"</span>: {
+    <span class="key">"rateLimit"</span>: <span class="number">10</span>,
+    <span class="key">"burstLimit"</span>: <span class="number">20</span>
+  }
+}</pre>
+            </div>
+            <div class="code-panel" id="usage-test">
+              <div class="test-panel">
+                <button class="test-send" onclick="tryGetUsage()">Send Request</button>
+                <div class="test-response" id="usage-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUSTOMER PORTAL -->
+      <div class="endpoint-block" id="portal">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Customer Portal</h2>
+          <code class="endpoint-url">/subscription/portal</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Generate a Polar customer portal URL where users can manage their billing details, payment methods, invoices, and subscription directly.</p>
+            <div class="params-title">Response Fields (200)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>portalUrl</td><td>string</td><td>Polar customer portal URL. Redirect the user here.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="portal-res">Response</button>
+              <button class="code-tab test-tab" data-target="portal-test">Test</button>
+            </div>
+            <div class="code-panel active" id="portal-res">
+<pre><span class="comment">// POST /subscription/portal</span>
+<span class="comment">// Header: Authorization: Bearer &lt;idToken&gt;</span>
+
+<span class="comment">// 200 OK</span>
+{
+  <span class="key">"portalUrl"</span>: <span class="string">"https://polar.sh/portal/..."</span>
+}</pre>
+            </div>
+            <div class="code-panel" id="portal-test">
+              <div class="test-panel">
+                <button class="test-send" onclick="tryPortal()">Send Request</button>
+                <div class="test-response" id="portal-response"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEBHOOK -->
+      <div class="endpoint-block" id="webhook">
+        <div class="endpoint-header">
+          <span class="method-badge post">POST</span>
+          <h2>Webhook</h2>
+          <code class="endpoint-url">/subscription/webhook</code>
+        </div>
+        <div class="endpoint-body">
+          <div class="endpoint-docs">
+            <p>Receives subscription event callbacks from Polar. This endpoint does not require authentication — it is called directly by Polar's webhook system to notify your backend of subscription changes.</p>
+            <div class="info-box note">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <div>This endpoint has <strong>no authentication</strong>. It is intended to be called by Polar's servers, not by your application directly.</div>
+            </div>
+            <div class="params-title">Request Body (from Polar)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>type</td><td>string</td><td>Event type, e.g. <code>subscription.created</code>, <code>subscription.updated</code>, <code>subscription.canceled</code>.</td></tr>
+                <tr><td>data</td><td>object</td><td>Event payload containing subscription details from Polar.</td></tr>
+              </tbody>
+            </table>
+            <div class="params-title">Response (200)</div>
+            <table class="params-table">
+              <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+              <tbody>
+                <tr><td>received</td><td>boolean</td><td>Always <code>true</code> on success.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="endpoint-code">
+            <div class="code-tabs">
+              <button class="code-tab active" data-target="webhook-req">Request</button>
+              <button class="code-tab" data-target="webhook-res">Response</button>
+            </div>
+            <div class="code-panel active" id="webhook-req">
+<pre><span class="comment">// POST /subscription/webhook</span>
+<span class="comment">// No Authorization header required</span>
+<span class="comment">// Called by Polar's servers</span>
+{
+  <span class="key">"type"</span>: <span class="string">"subscription.updated"</span>,
+  <span class="key">"data"</span>: {
+    <span class="key">"id"</span>: <span class="string">"sub_polar_abc123"</span>,
+    <span class="key">"status"</span>: <span class="string">"active"</span>,
+    <span class="key">"product_id"</span>: <span class="string">"prod_xyz789"</span>,
+    <span class="key">"customer_email"</span>: <span class="string">"[email]"</span>
+  }
+}</pre>
+            </div>
+            <div class="code-panel" id="webhook-res">
+<pre><span class="comment">// 200 OK</span>
+{
+  <span class="key">"received"</span>: <span class="boolean">true</span>
+}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content-area -->
+  </main>
+</div><!-- /layout -->
+
+<script src="icons.js"></script>
+<script src="app.js"></script>
+<script>
+async function tryGetSubscription() {
+  showLoading('getsub-response');
+  try {
+    const { status, data } = await apiRequest('GET', '/subscription');
+    renderResponse('getsub-response', status, data);
+  } catch(e) { renderResponse('getsub-response', 0, { error: e.message }); }
+}
+async function tryCheckout() {
+  showLoading('checkout-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/subscription/checkout', {
+      plan: document.getElementById('checkout-plan').value
+    });
+    renderResponse('checkout-response', status, data);
+  } catch(e) { renderResponse('checkout-response', 0, { error: e.message }); }
+}
+async function tryChangePlan() {
+  showLoading('change-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/subscription/change', {
+      newPlan: document.getElementById('change-plan').value
+    });
+    renderResponse('change-response', status, data);
+  } catch(e) { renderResponse('change-response', 0, { error: e.message }); }
+}
+async function tryCancelSubscription() {
+  showLoading('cancel-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/subscription/cancel', {
+      immediate: document.getElementById('cancel-immediate').value === 'true'
+    });
+    renderResponse('cancel-response', status, data);
+  } catch(e) { renderResponse('cancel-response', 0, { error: e.message }); }
+}
+async function tryGetUsage() {
+  showLoading('usage-response');
+  try {
+    const { status, data } = await apiRequest('GET', '/subscription/usage');
+    renderResponse('usage-response', status, data);
+  } catch(e) { renderResponse('usage-response', 0, { error: e.message }); }
+}
+async function tryPortal() {
+  showLoading('portal-response');
+  try {
+    const { status, data } = await apiRequest('POST', '/subscription/portal');
+    renderResponse('portal-response', status, data);
+  } catch(e) { renderResponse('portal-response', 0, { error: e.message }); }
+}
+</script>
+</body>
+</html>

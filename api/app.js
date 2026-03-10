@@ -59,6 +59,16 @@ function buildSidebar() {
       { href: 'auth.html#refresh', icon: 'rotateCw', label: 'Refresh Token', method: 'post' },
       { href: 'auth.html#logout', icon: 'logOut', label: 'Logout', method: 'post' },
     ]},
+    { title: 'Subscription', links: [
+      { href: 'subscription.html', icon: 'creditCard', label: 'Subscription Overview' },
+      { href: 'subscription.html#get-subscription', icon: 'eye', label: 'Get Status', method: 'get' },
+      { href: 'subscription.html#checkout', icon: 'shoppingCart', label: 'Checkout', method: 'post' },
+      { href: 'subscription.html#change', icon: 'rotateCw', label: 'Change Plan', method: 'post' },
+      { href: 'subscription.html#cancel', icon: 'xCircle', label: 'Cancel', method: 'post' },
+      { href: 'subscription.html#usage', icon: 'barChart', label: 'Usage', method: 'get' },
+      { href: 'subscription.html#portal', icon: 'externalLink', label: 'Customer Portal', method: 'post' },
+      { href: 'subscription.html#webhook', icon: 'zap', label: 'Webhook', method: 'post' },
+    ]},
     { title: 'Knowledge Bases', links: [
       { href: 'knowledgedbs.html', icon: 'database', label: 'KnowledgeDBs Overview' },
       { href: 'knowledgedbs.html#create', icon: 'filePlus', label: 'Create', method: 'post' },
@@ -109,11 +119,14 @@ function buildSidebar() {
 function getToken() { return localStorage.getItem('kdb_id_token') || ''; }
 function getAccessToken() { return localStorage.getItem('kdb_access_token') || ''; }
 function getRefreshToken() { return localStorage.getItem('kdb_refresh_token') || ''; }
+function getApiKey() { return localStorage.getItem('kdb_api_key') || ''; }
 
 function setTokens(data) {
   if (data.idToken) localStorage.setItem('kdb_id_token', data.idToken);
   if (data.accessToken) localStorage.setItem('kdb_access_token', data.accessToken);
   if (data.refreshToken) localStorage.setItem('kdb_refresh_token', data.refreshToken);
+  if (data.apiKey) localStorage.setItem('kdb_api_key', data.apiKey);
+  if (data.subscription && data.subscription.apiKey) localStorage.setItem('kdb_api_key', data.subscription.apiKey);
   if (data.user) localStorage.setItem('kdb_user', JSON.stringify(data.user));
 }
 
@@ -121,6 +134,7 @@ function clearTokens() {
   localStorage.removeItem('kdb_id_token');
   localStorage.removeItem('kdb_access_token');
   localStorage.removeItem('kdb_refresh_token');
+  localStorage.removeItem('kdb_api_key');
   localStorage.removeItem('kdb_user');
 }
 
@@ -148,7 +162,11 @@ function initCodeTabs() {
 // API request helper
 async function apiRequest(method, path, body = null, useAuth = true, isFormData = false) {
   const headers = {};
-  if (useAuth) headers['Authorization'] = `Bearer ${getToken()}`;
+  if (useAuth) {
+    headers['Authorization'] = `Bearer ${getToken()}`;
+    const apiKey = getApiKey();
+    if (apiKey) headers['x-api-key'] = apiKey;
+  }
   if (!isFormData) headers['Content-Type'] = 'application/json';
 
   const opts = { method, headers };

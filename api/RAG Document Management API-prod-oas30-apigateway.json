@@ -1,0 +1,1643 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "RAG Document Management API",
+    "description" : "REST API for RAG Document Management System",
+    "version" : "2026-03-09T02:45:35Z"
+  },
+  "servers" : [ {
+    "url" : "https://fgbpqt2pq6.execute-api.us-east-1.amazonaws.com/{basePath}",
+    "variables" : {
+      "basePath" : {
+        "default" : "prod"
+      }
+    }
+  } ],
+  "paths" : {
+    "/subscription/change" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagSubscriptionHandler2875430F-9LjnHB0y8dBL/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/documents" : {
+      "get" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagDocumentHandler724EC8A7-V7GI5CG0feqz/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/images/reindex" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagImageHandler179CFDC2-ucNqB6ODa0rK/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/auth" : {
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/images/upload" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagImageHandler179CFDC2-ucNqB6ODa0rK/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/documents/{docId}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagDocumentHandler724EC8A7-V7GI5CG0feqz/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "delete" : {
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagDocumentHandler724EC8A7-V7GI5CG0feqz/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "parameters" : [ {
+          "name" : "docId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/images/{imageId}" : {
+      "get" : {
+        "parameters" : [ {
+          "name" : "imageId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagImageHandler179CFDC2-ucNqB6ODa0rK/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "delete" : {
+        "parameters" : [ {
+          "name" : "imageId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagImageHandler179CFDC2-ucNqB6ODa0rK/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "parameters" : [ {
+          "name" : "imageId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/images/generate" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagImageHandler179CFDC2-ucNqB6ODa0rK/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/auth/signup" : {
+      "post" : {
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagAuthHandler4FD94972-OYUIJkuT1ZVu/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/subscription/checkout" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagSubscriptionHandler2875430F-9LjnHB0y8dBL/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/auth/refresh" : {
+      "post" : {
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagAuthHandler4FD94972-OYUIJkuT1ZVu/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/subscription/cancel" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagSubscriptionHandler2875430F-9LjnHB0y8dBL/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/knowledgedbs/{knowledgeDbId}" : {
+      "delete" : {
+        "parameters" : [ {
+          "name" : "knowledgeDbId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagKnowledgeDBHandler6A7F9D7F-b4K2dWJiGxqZ/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "parameters" : [ {
+          "name" : "knowledgeDbId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/knowledgedbs" : {
+      "get" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagKnowledgeDBHandler6A7F9D7F-b4K2dWJiGxqZ/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagKnowledgeDBHandler6A7F9D7F-b4K2dWJiGxqZ/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/subscription" : {
+      "get" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagSubscriptionHandler2875430F-9LjnHB0y8dBL/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/search" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagSearchHandler9148DE25-4M74B2YQOQGd/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/documents/reindex" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagDocumentHandler724EC8A7-V7GI5CG0feqz/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/auth/logout" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagAuthHandler4FD94972-OYUIJkuT1ZVu/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/" : {
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/auth/login" : {
+      "post" : {
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagAuthHandler4FD94972-OYUIJkuT1ZVu/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/health" : {
+      "get" : {
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagAuthHandler4FD94972-OYUIJkuT1ZVu/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/documents/generate" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagDocumentHandler724EC8A7-V7GI5CG0feqz/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/documents/upload" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagDocumentHandler724EC8A7-V7GI5CG0feqz/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/subscription/usage" : {
+      "get" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagSubscriptionHandler2875430F-9LjnHB0y8dBL/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/images" : {
+      "get" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagImageHandler179CFDC2-ucNqB6ODa0rK/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/subscription/webhook" : {
+      "post" : {
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagSubscriptionHandler2875430F-9LjnHB0y8dBL/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    },
+    "/subscription/portal" : {
+      "post" : {
+        "security" : [ {
+          "KnowledgeDBStackRagApiAuthorizer508ED08D" : [ ]
+        } ],
+        "x-amazon-apigateway-integration" : {
+          "type" : "aws_proxy",
+          "uri" : "arn:aws:apigateway:us-east-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-1:521434189227:function:KnowledgeDBStack-RagSubscriptionHandler2875430F-9LjnHB0y8dBL/invocations",
+          "httpMethod" : "POST",
+          "passthroughBehavior" : "when_no_match",
+          "responseTransferMode" : "BUFFERED"
+        }
+      },
+      "options" : {
+        "responses" : {
+          "204" : {
+            "description" : "204 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Methods" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Headers" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : { }
+          }
+        },
+        "x-amazon-apigateway-integration" : {
+          "type" : "mock",
+          "responses" : {
+            "default" : {
+              "statusCode" : "204",
+              "responseParameters" : {
+                "method.response.header.Access-Control-Allow-Methods" : "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+                "method.response.header.Access-Control-Allow-Headers" : "'Content-Type,Authorization,x-api-key'",
+                "method.response.header.Access-Control-Allow-Origin" : "'*'"
+              }
+            }
+          },
+          "requestTemplates" : {
+            "application/json" : "{ statusCode: 200 }"
+          },
+          "passthroughBehavior" : "when_no_match"
+        }
+      }
+    }
+  },
+  "components" : {
+    "securitySchemes" : {
+      "api_key" : {
+        "type" : "apiKey",
+        "name" : "x-api-key",
+        "in" : "header"
+      },
+      "KnowledgeDBStackRagApiAuthorizer508ED08D" : {
+        "type" : "apiKey",
+        "name" : "Authorization",
+        "in" : "header",
+        "x-amazon-apigateway-authtype" : "cognito_user_pools",
+        "x-amazon-apigateway-authorizer" : {
+          "type" : "cognito_user_pools",
+          "providerARNs" : [ "arn:aws:cognito-idp:us-east-1:521434189227:userpool/us-east-1_yj2Smp3Ws" ]
+        }
+      }
+    }
+  },
+  "x-amazon-apigateway-binary-media-types" : [ "multipart/form-data", "image/*", "application/pdf", "application/octet-stream", "text/plain", "text/markdown", "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ]
+}

@@ -136,6 +136,17 @@
             <span style="font-size:12px;color:var(--text-muted)">WebSocket API</span>
           </div>
         </a>
+
+        <a href="subscription.html" class="overview-card">
+          <div class="card-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+          <h3>Subscription</h3>
+          <p>Manage billing, checkout, plan changes, cancellations, and usage tracking. Powered by Polar for seamless payment processing.</p>
+          <div class="card-endpoints">
+            <span class="method-badge post">POST</span>
+            <span class="method-badge get">GET</span>
+            <span style="font-size:12px;color:var(--text-muted)">7 endpoints</span>
+          </div>
+        </a>
       </div>
 
       <div class="auth-banner">
@@ -143,6 +154,7 @@
         <div class="text">
           All API endpoints (except <code>/auth/signup</code>, <code>/auth/login</code>, and <code>/health</code>) require authentication.
           Include your <code>idToken</code> in the <code>Authorization: Bearer &lt;token&gt;</code> header.
+          Endpoints for documents, images, knowledge bases, and search also require the <code>x-api-key</code> header returned from login.
           Tokens expire after 1 hour — use the refresh endpoint to get new ones.
         </div>
       </div>

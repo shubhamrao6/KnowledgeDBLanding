@@ -57,6 +57,7 @@
               <tbody>
                 <tr><td>message</td><td>string</td><td>Success confirmation message.</td></tr>
                 <tr><td>userId</td><td>string</td><td>Unique user identifier (UUID).</td></tr>
+                <tr><td>apiKey</td><td>string</td><td>API key for <code>x-api-key</code> header. Required for document, image, knowledge base, and search endpoints.</td></tr>
               </tbody>
             </table>
             <div class="info-box note">
@@ -81,7 +82,8 @@
             <div class="code-panel" id="signup-res"><pre><span class="comment">// 200 OK</span>
 {
   <span class="key">"message"</span>: <span class="string">"User registered successfully. Please verify your email."</span>,
-  <span class="key">"userId"</span>: <span class="string">"d4f884e8-c071-7040-93cf-ce8053c7c658"</span>
+  <span class="key">"userId"</span>: <span class="string">"94d82498-d0d1-70c2-b0e9-43cc989a2817"</span>,
+  <span class="key">"apiKey"</span>: <span class="string">"hCe96L9UgV3cjdWPcfenl3i7WJrKS5aI2FP16EHm"</span>
 }</pre></div>
             <div class="code-panel" id="signup-curl"><pre><span class="comment"># cURL example</span>
 curl -X POST \
@@ -135,6 +137,7 @@ curl -X POST \
                 <tr><td>expiresIn</td><td>number</td><td>Token lifetime in seconds (3600 = 1 hour).</td></tr>
                 <tr><td>tokenType</td><td>string</td><td>Always <code>"Bearer"</code>.</td></tr>
                 <tr><td>user</td><td>object</td><td>User profile: <code>userId</code>, <code>email</code>, <code>firstName</code>, <code>lastName</code>.</td></tr>
+                <tr><td>subscription</td><td>object</td><td>Subscription details: <code>plan</code>, <code>status</code>, <code>apiKey</code>, <code>currentPeriodEnd</code>.</td></tr>
               </tbody>
             </table>
           </div>
@@ -162,6 +165,12 @@ curl -X POST \
     <span class="key">"email"</span>: <span class="string">"[email]"</span>,
     <span class="key">"firstName"</span>: <span class="string">"[name]"</span>,
     <span class="key">"lastName"</span>: <span class="string">"[name]"</span>
+  },
+  <span class="key">"subscription"</span>: {
+    <span class="key">"plan"</span>: <span class="string">"starter"</span>,
+    <span class="key">"status"</span>: <span class="string">"active"</span>,
+    <span class="key">"apiKey"</span>: <span class="string">"IC01PUROzD70dFJtVhrVNm1AMC22kpW2..."</span>,
+    <span class="key">"currentPeriodEnd"</span>: <span class="string">""</span>
   }
 }</pre></div>
             <div class="code-panel" id="login-curl"><pre><span class="comment"># cURL example</span>
@@ -312,6 +321,9 @@ async function trySignup() {
       firstName: document.getElementById('signup-first').value,
       lastName: document.getElementById('signup-last').value
     }, false);
+    if (status === 200 && data.apiKey) {
+      localStorage.setItem('kdb_api_key', data.apiKey);
+    }
     renderResponse('signup-response', status, data);
   } catch(e) { renderResponse('signup-response', 0, { error: e.message }); }
 }
